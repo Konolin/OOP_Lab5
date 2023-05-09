@@ -3,4 +3,4 @@ project(OOP_Lab5)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(OOP_Lab5 main.cpp Scooter.h Domain.h Scooter.cpp)
+add_executable(OOP_Lab5 main.cpp Scooter.h Scooter.cpp UI.cpp Repository.cpp Controller.cpp)

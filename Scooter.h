@@ -1,9 +1,8 @@
 #pragma once
 
-#include "Domain.h"
 #include <string>
 
-using Domain::Scooter, std::string;
+using std::string;
 
 namespace Domain {
     class Scooter {
