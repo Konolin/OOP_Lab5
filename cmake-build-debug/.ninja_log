@@ -1,0 +1,8 @@
+# ninja log v5
+11	468	7053625052906280	CMakeFiles/OOP_Lab5.dir/Scooter.cpp.obj	3cc2d9b02ae19aa
+25	475	7053625052990171	CMakeFiles/OOP_Lab5.dir/Repository.cpp.obj	1adb15cf5c4ec24
+20	573	7053625053957374	CMakeFiles/OOP_Lab5.dir/Tests.cpp.obj	7d681d1ddf9e8b79
+16	623	7053625054452933	CMakeFiles/OOP_Lab5.dir/Controller.cpp.obj	1267e2341e493d19
+7	623	7053625054452933	CMakeFiles/OOP_Lab5.dir/UI.cpp.obj	80fe1aecc067101
+0	691	7053625055110450	CMakeFiles/OOP_Lab5.dir/main.cpp.obj	c5ef482bfe2f97e
+692	811	7053625056291449	OOP_Lab5.exe	6d81a2384b3fe039

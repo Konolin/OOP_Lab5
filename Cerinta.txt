@@ -12,7 +12,7 @@ Functional requirements:
     F6. A customer must be able to reserve or use an electric scooter from the list.
 
 Additional requirements:
-    W1. User interaction with the program occurs via console.
+    W1. UserRole interaction with the program occurs via console.
     W2. The program should include example data for 10 or more products when started.
     W3. The application should be designed using a layered architecture (following the example diagram in Lab 4) and
         modularized accordingly (with namespaces for domain, repository, controller, ui);

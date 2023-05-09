@@ -1,8 +1,11 @@
 #pragma once
 
+
 #include <string>
 
+
 using std::string;
+
 
 namespace Domain {
     class Scooter {
@@ -21,8 +24,9 @@ namespace Domain {
         Status status;
 
     public:
-        Scooter(const string &_id, const string &_model, Date _commissionDate, int _mileage, const string &_lastLocation,
-                Status _status);
+        // constructor
+        Scooter(const string &_id, const string &_model, Date _commissionDate, int _mileage,
+                const string &_lastLocation, Status _status);
     };
 
 }

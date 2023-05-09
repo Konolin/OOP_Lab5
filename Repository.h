@@ -1,9 +1,12 @@
 #pragma once
 
+
 #include <vector>
 #include "Scooter.h"
 
+
 using std::vector, Domain::Scooter;
+
 
 namespace Repository {
     class Repo {
@@ -13,6 +16,7 @@ namespace Repository {
         void generateDummyData();
 
     public:
+        // constructor
         Repo();
     };
 }
