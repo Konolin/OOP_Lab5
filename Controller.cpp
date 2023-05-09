@@ -4,4 +4,4 @@
 
 using Controller::Ctr;
 
-Controller::Ctr::Ctr(shared_ptr<Repo> repoObj) : repository(std::move(repoObj)){}
+Controller::Ctr::Ctr(shared_ptr<Repo> repoObj) : repository(std::move(repoObj)) {}

@@ -21,7 +21,7 @@ Additional requirements:
 Quality requirements:
     Q1. Exceptions (such as invalid inputs) should be handled carefully.
     Q2. Code should be written entirely in English and use self-explanatory and appropriate names for classes, methods, and variables.
-    Q3. To ensure that the repository and controller work without using the user interface, unit tests are required.
+    Q3. To ensure that the repository and controller work without using the user interface, unit Tests are required.
 
 Submission criteria:
     K1. The solution can consist of multiple files. They must be submitted as a ZIP file, L5_TeamX.zip (X is the number)
