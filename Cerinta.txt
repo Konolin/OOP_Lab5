@@ -1,0 +1,36 @@
+Each electric scooter is described by the following characteristics:
+    identifier (3 letters), model, commissioning date, mileage, last location (address as text),
+    current status (parked, reserved, in use, in maintenance, out of service).
+
+
+Functional requirements:
+    F1. Two different users: manager and customer. At the beginning of the program, the user selects their role.
+    F2. A manager can add, delete or edit electric scooters.
+    F3. A customer or manager must be able to search for electric scooters by location.
+    F4. A customer or manager must be able to filter the vehicle list by age or mileage, with a value specified by the user.
+    F5. A manager must be able to view all electric scooters sorted by age in ascending order.
+    F6. A customer must be able to reserve or use an electric scooter from the list.
+
+Additional requirements:
+    W1. User interaction with the program occurs via console.
+    W2. The program should include example data for 10 or more products when started.
+    W3. The application should be designed using a layered architecture (following the example diagram in Lab 4) and
+        modularized accordingly (with namespaces for domain, repository, controller, ui);
+    W4. References to repository and controller must be implemented as smart pointers.
+
+Quality requirements:
+    Q1. Exceptions (such as invalid inputs) should be handled carefully.
+    Q2. Code should be written entirely in English and use self-explanatory and appropriate names for classes, methods, and variables.
+    Q3. To ensure that the repository and controller work without using the user interface, unit tests are required.
+
+Submission criteria:
+    K1. The solution can consist of multiple files. They must be submitted as a ZIP file, L5_TeamX.zip (X is the number)
+    (not RAR, 7z, etc., the archive only contains source code and no directories).
+    K2. Each team member must submit the result and be able to explain the code.
+    K3. The Main.cpp file contains main().
+    K4. The program must be compilable with the GnuCompiler using the following command:
+    g++ -std=c++20 -o prog *.cpp
+
+Recommendations:
+    R1. In the team, agree on the interfaces of the domain, ui, controller, repository areas first; this allows for
+    parallel work on the implementation of different parts.
