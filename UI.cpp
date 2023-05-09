@@ -16,6 +16,7 @@ void UI::startUI() {
     cout << "Select a role (admin / customer): ";
     cin >> userInput;
 
+    // TODO - wrong input check
     if (userInput == "admin") userRole = admin;
     else userRole = customer;
 
@@ -24,14 +25,46 @@ void UI::startUI() {
 
 
 void UI::mainMenuUI() {
-    cout << "1. ";
+    cout << "~~~~~ Main menu: ~~~~~\n\n";
+    cout << "1. Run all tests\n";
+    cout << "2. Exit\n\n";
+    cout << "Choose an option: ";
 }
 
 
 void UI::mainMenu() {
-    while (true) {
+    string optionStr;
+    int optionInt;
 
+    while (true) {
+        cout << string(30, '\n');
+        mainMenuUI();
+        cin >> optionStr;
+        cout << string(30, '\n');
+
+        try {
+            optionInt = std::stoi(optionStr);
+        } catch (std::exception &e) {
+            optionInt = -1;
+        }
+
+        switch (optionInt) {
+            case 1:
+                Tests testsObj;
+                testsObj.testAll();
+                cin.ignore();
+                cout << "Press any key to continue...";
+                cin.get();
+                continue;
+            case 2:
+                break;
+            default:
+                cin.ignore();
+                cout << "Invalid input, try again\n\n";
+                cout << "Press any key to continue...";
+                cin.get();
+                continue;
+        }
+        break;
     }
-    Tests testsObj;
-    testsObj.testAll();
 }

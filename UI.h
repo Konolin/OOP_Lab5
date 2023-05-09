@@ -12,7 +12,7 @@ namespace UserInterface {
         UserRole userRole{};
 
         // prints the menu options
-        void mainMenuUI();
+        static void mainMenuUI();
 
         // gets the input for the menu options, calls the needed methods
         void mainMenu();

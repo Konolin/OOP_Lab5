@@ -8,16 +8,17 @@ using std::string;
 
 
 namespace Domain {
+    enum Status {
+        parked, reserved, inUse, inMaintenance, outOfService
+    };
+
+    struct Date {
+        int day, month, year;
+    };
+
+
     class Scooter {
     private:
-        enum Status {
-            parked, resereved, inUse, inMaintenance, outOfService
-        };
-
-        struct Date {
-            int day, month, year;
-        };
-
         string id, model, lastLocation;
         Date commissionDate{};
         int mileage{};

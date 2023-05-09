@@ -1,9 +1,11 @@
 #include "Repository.h"
 
-Repository::Repo::Repo() {
+using Repository::Repo;
+
+Repo::Repo() {
     generateDummyData();
 }
 
-void Repository::Repo::generateDummyData() {
+void Repo::generateDummyData() {
     // TODO - add 10 default scooters
 }
