@@ -1,6 +1,5 @@
 #include "Controller.h"
 #include <utility>
-#include <exception>
 
 
 using Controller::Ctr, std::invalid_argument;

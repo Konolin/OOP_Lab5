@@ -26,7 +26,7 @@ void UI::startUI() {
 
 void UI::mainMenuUI() {
     cout << "~~~~~ Main menu: ~~~~~\n\n";
-    cout << "1. Run all tests\n";
+    cout << "1. Run all tests\n"; // poate sa fie scos
     cout << "2. Exit\n\n";
     cout << "Choose an option: ";
 }

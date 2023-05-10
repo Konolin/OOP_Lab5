@@ -5,9 +5,10 @@
 
 using Repository::Repo, Controller::Ctr, UserInterface::UI;
 
-// test
 
 int main() {
+    // run tests
+
     auto repository = std::make_shared<Repo>();
     auto controller = std::make_shared<Ctr>(repository);
     UI ui(controller);
