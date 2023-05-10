@@ -28,6 +28,29 @@ namespace Domain {
         // constructor
         Scooter(const string &_id, const string &_model, Date _commissionDate, int _mileage,
                 const string &_lastLocation, Status _status);
-    };
 
+        string getId() const;
+
+        string getModel() const;
+
+        Date getCommissionDate() const;
+
+        int getMileage() const;
+
+        string getLastLocation() const;
+
+        Status getStatus() const;
+
+        void setId(const string& newId);
+
+        void setModel(const string& newModel);
+
+        void setCommissionDate(const Date &newCommissionDate);
+
+        void setNewMileage(int newMileage);
+
+        void setLastLocation(const string &newLastLocation);
+
+        void setStatus(Status newStatus);
+    };
 }
