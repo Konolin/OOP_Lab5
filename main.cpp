@@ -7,7 +7,7 @@ using Repository::Repo, Controller::Ctr, UserInterface::UI;
 
 
 int main() {
-    // run tests
+    // run tests aici
 
     auto repository = std::make_shared<Repo>();
     auto controller = std::make_shared<Ctr>(repository);
