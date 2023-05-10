@@ -47,7 +47,7 @@ namespace Domain {
 
         void setCommissionDate(const Date &newCommissionDate);
 
-        void setNewMileage(int newMileage);
+        void setMileage(int newMileage);
 
         void setLastLocation(const string &newLastLocation);
 
