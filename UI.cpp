@@ -1,10 +1,9 @@
 #include "UI.h"
-#include "Tests.h"
 #include <utility>
 #include <iostream>
 
 
-using UserInterface::UI, Test::Tests, std::cout, std::cin, Controller::admin, Controller::customer;
+using UserInterface::UI, std::cout, std::cin, Controller::admin, Controller::customer;
 
 
 UI::UI(shared_ptr<Ctr> ctrObj) : controller(std::move(ctrObj)) {}
@@ -26,7 +25,6 @@ void UI::startUI() {
 
 void UI::mainMenuUI() {
     cout << "~~~~~ Main menu: ~~~~~\n\n";
-    cout << "1. Run all tests\n"; // poate sa fie scos
     cout << "2. Exit\n\n";
     cout << "Choose an option: ";
 }
@@ -50,8 +48,7 @@ void UI::mainMenu() {
 
         switch (optionInt) {
             case 1:
-                Tests testsObj;
-                testsObj.testAll();
+                // Todo - ceva
                 cin.ignore();
                 cout << "Press any key to continue...";
                 cin.get();

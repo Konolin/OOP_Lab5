@@ -1,13 +1,15 @@
 #include "Repository.h"
 #include "Controller.h"
 #include "UI.h"
+#include "Tests.h"
 
 
-using Repository::Repo, Controller::Ctr, UserInterface::UI;
+using Repository::Repo, Controller::Ctr, UserInterface::UI, Test::Tests;
 
 
 int main() {
-    // run tests aici
+    Tests testsObj;
+    testsObj.testAll();
 
     auto repository = std::make_shared<Repo>();
     auto controller = std::make_shared<Ctr>(repository);
