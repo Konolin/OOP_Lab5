@@ -11,6 +11,8 @@ int main() {
 
     //Commentr
 
+    //master of pupets pulling my strings
+
     auto repository = std::make_shared<Repo>();
     auto controller = std::make_shared<Ctr>(repository);
     UI ui(controller);
