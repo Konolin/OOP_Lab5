@@ -5,7 +5,7 @@
 namespace Test {
     class Tests{
     private:
-        void testDomain();
+        static void testDomain();
 
         void testRepository();
 

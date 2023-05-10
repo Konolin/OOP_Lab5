@@ -53,8 +53,8 @@ void Scooter::setCommissionDate(const Date &newCommissionDate) {
     commissionDate = newCommissionDate;
 }
 
-void Scooter::setNewMileage(int newMileage) {
-    if (newMileage) mileage = newMileage;
+void Scooter::setMileage(int newMileage) {
+    if (newMileage > 0) mileage = newMileage;
     else throw invalid_argument("Mileage can not be negative.");
 }
 
