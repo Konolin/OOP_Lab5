@@ -10,6 +10,7 @@ int main() {
     // run tests aici
 
     //Commentr
+    //Cata
 
     auto repository = std::make_shared<Repo>();
     auto controller = std::make_shared<Ctr>(repository);
