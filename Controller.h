@@ -22,10 +22,10 @@ namespace Controller {
         static void dataCheck(const string &id, const string &model, Date commissionDate, int mileage,
                        const string &lastLocation, Status status);
 
-        static bool hasThreeLetters(const string &id);
-
     public:
         // constructor
         Ctr(shared_ptr<Repo> repoObj);
+
+        static bool hasThreeLetters(const string &id);
     };
 }
