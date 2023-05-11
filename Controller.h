@@ -10,10 +10,6 @@ using std::shared_ptr, Repository::Repo, Domain::Date, Domain::Status;
 
 
 namespace Controller {
-    enum UserRole {
-        customer, admin
-    };
-
     class Ctr {
     private:
         shared_ptr<Repo> repository;
