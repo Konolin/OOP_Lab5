@@ -58,37 +58,37 @@ void UI::ownerMenu() {
 
         switch (optionInt) {
             case 1:
-                // Todo - ceva
+                addScooter();
                 cin.ignore();
                 cout << "Press any key to continue...";
                 cin.get();
                 continue;
             case 2:
-                // Todo - ceva
+                deleteScooter();
                 cin.ignore();
                 cout << "Press any key to continue...";
                 cin.get();
                 continue;
             case 3:
-                // Todo - ceva
+                editScooter();
                 cin.ignore();
                 cout << "Press any key to continue...";
                 cin.get();
                 continue;
             case 4:
-                // Todo - ceva
+                searchByLocation();
                 cin.ignore();
                 cout << "Press any key to continue...";
                 cin.get();
                 continue;
             case 5:
-                // Todo - ceva
+                filterScooters();
                 cin.ignore();
                 cout << "Press any key to continue...";
                 cin.get();
                 continue;
             case 6:
-                // Todo - ceva
+                viewScooters();
                 cin.ignore();
                 cout << "Press any key to continue...";
                 cin.get();
@@ -136,25 +136,25 @@ void UI::customerMenu() {
 
         switch (optionInt) {
             case 1:
-                // Todo - ceva
+                searchByLocation();
                 cin.ignore();
                 cout << "Press any key to continue...";
                 cin.get();
                 continue;
             case 2:
-                // Todo - ceva
+                filterScooters();
                 cin.ignore();
                 cout << "Press any key to continue...";
                 cin.get();
                 continue;
             case 3:
-                // Todo - ceva
+                reserveScooter();
                 cin.ignore();
                 cout << "Press any key to continue...";
                 cin.get();
                 continue;
             case 4:
-                // Todo - ceva
+                useScooter();
                 cin.ignore();
                 cout << "Press any key to continue...";
                 cin.get();
@@ -170,4 +170,44 @@ void UI::customerMenu() {
         }
         break;
     }
+}
+
+
+void UI::addScooter() {
+    // TODO - implementation
+}
+
+
+void UI::deleteScooter() {
+    // TODO - implementation
+}
+
+
+void UI::editScooter() {
+    // TODO - implementation
+}
+
+
+void UI::searchByLocation() {
+    // TODO - implementation
+}
+
+
+void UI::filterScooters() {
+    // TODO - implementation
+}
+
+
+void UI::viewScooters() {
+    // TODO - implementation
+}
+
+
+void UI::reserveScooter() {
+    // TODO - implementation
+}
+
+
+void UI::useScooter() {
+    // TODO - implementation
 }
