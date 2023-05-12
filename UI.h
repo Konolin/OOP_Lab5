@@ -54,6 +54,15 @@ namespace UserInterface {
         // gets the information of a scooter that the user wants to use
         void useScooter();
 
+        // converts a scooterObject to string
+        static string scooterToString(const Scooter &scooter);
+
+        // converts the date to string
+        static string dateToString(const Date &date);
+
+        // converts the status to string
+        static string statusToString(const Status &status);
+
     public:
         // constructor
         UI(shared_ptr<Ctr> ctrObj);

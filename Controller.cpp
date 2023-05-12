@@ -49,3 +49,7 @@ bool Ctr::hasThreeLetters(const string &id) {
         if (std::isalpha(c)) count++;
     return count == 3;
 }
+
+vector<Scooter> Ctr::sortedByAgeScooters() {
+    return vector<Scooter>();
+}
