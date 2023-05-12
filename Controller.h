@@ -23,5 +23,7 @@ namespace Controller {
         Ctr(shared_ptr<Repo> repoObj);
 
         static bool hasThreeLetters(const string &id);
+
+        vector<Scooter> sortedByAgeScooters();
     };
 }
