@@ -19,17 +19,17 @@ void Ctr::dataCheck(const string &id, const string &model, Date commissionDate, 
 
     // check if the commission date is valid
     if (commissionDate.day < 1 || commissionDate.day > 31)
-        throw std::invalid_argument("Commission date day is not valid.");
+        throw invalid_argument("Commission date day is not valid.");
     if (commissionDate.day == 31 && commissionDate.month % 2 == 0)
-        throw std::invalid_argument("Commission date day is not valid.");
+        throw invalid_argument("Commission date day is not valid.");
     if (commissionDate.day > 28 && commissionDate.month == 2 && commissionDate.year % 4 != 0)
-        throw std::invalid_argument("Commission date day is not valid.");
+        throw invalid_argument("Commission date day is not valid.");
     if (commissionDate.day > 29 && commissionDate.month == 2 && commissionDate.year % 4 == 0)
-        throw std::invalid_argument("Commission date day is not valid.");
+        throw invalid_argument("Commission date day is not valid.");
     if (commissionDate.month < 1 || commissionDate.month > 12)
-        throw std::invalid_argument("Commission date month is not valid.");
+        throw invalid_argument("Commission date month is not valid.");
     if (commissionDate.year > 2023)
-        throw std::invalid_argument("Commission date year is not valid.");
+        throw invalid_argument("Commission date year is not valid.");
 
     // check if mileage is valid
     if (mileage < 0)
@@ -49,19 +49,19 @@ bool Ctr::hasThreeLetters(const string &id) {
     return count == 3;
 }
 
-void Ctr::add(const std::string& id, const std::string& model, const Date& commissionDate, int mileage,
-         const std::string& lastLocation, const Status& status){
+void Ctr::add(const string& id, const string& model, const Date& commissionDate, int mileage,
+         const string& lastLocation, const Status& status){
     Scooter scooter(id, model, commissionDate, mileage, lastLocation, status);
     //dataCheck(id, model, commissionDate, mileage, lastLocation, status);
     repository->add(scooter);
 }
 
-bool Ctr::remove(const std::string& id){
+bool Ctr::remove(const string& id){
     return repository->remove(id);
 }
 
-Scooter& Ctr::find(const std::string& id){
-    for (auto& scooter : repository->get_all()){
+Scooter& Ctr::find(const string& id){
+    for (auto& scooter : repository->getAll()){
         if (scooter.getId() == id) {
             return scooter;
         }
@@ -69,21 +69,21 @@ Scooter& Ctr::find(const std::string& id){
     throw std::runtime_error("Scooter not found");
 }
 
-void Ctr::editMileage(const std::string &id, const int& newMileage) {
+void Ctr::editMileage(const string &id, const int& newMileage) {
     Scooter& scooter = find(id);
     scooter.setMileage(newMileage);
 }
 
-void Ctr::editLocation(const std::string &id, const std::string& newLastLocation) {
+void Ctr::editLocation(const string &id, const string& newLastLocation) {
     Scooter& scooter = find(id);
     scooter.setLastLocation(newLastLocation);
 }
 
-void Ctr::editStatus(const std::string &id, Status& newStatus) {
+void Ctr::editStatus(const string &id, Status& newStatus) {
     Scooter& scooter = find(id);
     scooter.setStatus(newStatus);
 }
 
-std::vector<Scooter> Ctr::get_all() {
-    return repository->get_all();
+vector<Scooter> Ctr::getAll() {
+    return repository->getAll();
 }
