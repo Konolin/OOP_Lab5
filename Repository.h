@@ -18,8 +18,11 @@ namespace Repository {
     public:
         // constructor
         Repo();
-        void add(const Scooter& new_scooter);
-        bool remove(const std::string& id);
-        std::vector<Scooter> get_all();
+
+        void add(const Scooter &new_scooter);
+
+        bool remove(const std::string &id);
+
+        std::vector<Scooter> getAll();
     };
 }

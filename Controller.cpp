@@ -1,14 +1,16 @@
 #include "Controller.h"
 #include <utility>
+#include <iostream>
 
 
-using Controller::Ctr, std::invalid_argument;
+using Controller::Ctr, std::invalid_argument, Domain::parked, Domain::reserved;
+
 
 Ctr::Ctr(shared_ptr<Repo> repoObj) : repository(std::move(repoObj)) {}
 
 
 void Ctr::dataCheck(const string &id, const string &model, Date commissionDate, int mileage,
-                                const string &lastLocation, Status status) {
+                    const string &lastLocation, Status status) {
     // check if the id has exactly 3 letters
     if (id.length() != 3 || !hasThreeLetters(id))
         throw invalid_argument("The id is not valid.");
@@ -33,7 +35,7 @@ void Ctr::dataCheck(const string &id, const string &model, Date commissionDate, 
 
     // check if mileage is valid
     if (mileage < 0)
-       throw invalid_argument("Mileage can not be negative.");
+        throw invalid_argument("Mileage can not be negative.");
 
     // check if lastLocation is valid
     if (lastLocation.empty())
@@ -42,51 +44,61 @@ void Ctr::dataCheck(const string &id, const string &model, Date commissionDate, 
     // TODO check status cumva idk inca cum
 }
 
+
 bool Ctr::hasThreeLetters(const string &id) {
     int count = 0;
-    for (char c : id)
+    for (char c: id)
         if (std::isalpha(c)) count++;
     return count == 3;
 }
 
-void Ctr::add(const string& id, const string& model, const Date& commissionDate, int mileage,
-         const string& lastLocation, const Status& status){
+
+void Ctr::add(const string &id, const string &model, const Date &commissionDate, int mileage,
+              const string &lastLocation, const Status &status) {
     Scooter scooter(id, model, commissionDate, mileage, lastLocation, status);
     //dataCheck(id, model, commissionDate, mileage, lastLocation, status);
-//    repository->add(scooter);
+    repository->add(scooter);
 }
 
-bool Ctr::remove(const string& id){
-//    return repository->remove(id);
+
+bool Ctr::remove(const string &id) {
+    return repository->remove(id);
 }
 
-Scooter& Ctr::find(const string& id){
-    for (auto& scooter : repository->getAll()){
+
+Scooter *Ctr::find(const string &id) {
+    for (auto &scooter: repository->getAll()) {
         if (scooter.getId() == id) {
-            return scooter;
+            std::cout << "Address stored in repository: " << &scooter << std::endl;
+            return &scooter;
         }
     }
     throw std::runtime_error("Scooter not found");
 }
 
-void Ctr::editMileage(const string &id, const int& newMileage) {
-    Scooter& scooter = find(id);
-    scooter.setMileage(newMileage);
+
+void Ctr::editMileage(const string &id, const int &newMileage) {
+    Scooter *scooter = find(id);
+    scooter->setMileage(newMileage);
 }
 
-void Ctr::editLocation(const string &id, const string& newLastLocation) {
-    Scooter& scooter = find(id);
-    scooter.setLastLocation(newLastLocation);
+
+void Ctr::editLocation(const string &id, const string &newLastLocation) {
+    Scooter *scooter = find(id);
+    scooter->setLastLocation(newLastLocation);
 }
 
-void Ctr::editStatus(const string &id, Status& newStatus) {
-    Scooter& scooter = find(id);
-    scooter.setStatus(newStatus);
+
+void Ctr::editStatus(const string &id, Status &newStatus) {
+    Scooter *scooter = find(id);
+    scooter->setStatus(newStatus);
 }
+
 
 vector<Scooter> Ctr::getAll() {
     return repository->getAll();
 }
+
 
 vector<Scooter> Ctr::sortedByCommissionDate() {
     vector<Scooter> sortedVector = repository->getAll();
@@ -94,7 +106,8 @@ vector<Scooter> Ctr::sortedByCommissionDate() {
     return sortedVector;
 }
 
-bool Ctr::dateAscending(const Scooter& scooter1, const Scooter& scooter2) {
+
+bool Ctr::dateAscending(const Scooter &scooter1, const Scooter &scooter2) {
     if (scooter1.getCommissionDate().year != scooter2.getCommissionDate().year)
         return scooter1.getCommissionDate().year < scooter2.getCommissionDate().year;
 
@@ -103,3 +116,15 @@ bool Ctr::dateAscending(const Scooter& scooter1, const Scooter& scooter2) {
 
     return scooter1.getCommissionDate().day < scooter2.getCommissionDate().day;
 }
+
+bool Ctr::reserveScooter(const string &id) {
+    Scooter *scooter = find(id);
+
+    if (scooter->getStatus() == parked) {
+        scooter->setStatus(reserved);
+        return true;
+    }
+    return false;
+}
+
+

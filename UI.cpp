@@ -4,7 +4,7 @@
 
 
 using UserInterface::UI, std::cout, std::cin, UserInterface::owner, UserInterface::customer, std::to_string,
-        Domain::inUse, Domain::inMaintenance, Domain::parked, Domain::reserved, Domain::outOfService;
+        Domain::inUse, Domain::inMaintenance, Domain::parked, Domain::reserved, Domain::outOfService, std::exception;
 
 
 UI::UI(shared_ptr<Ctr> ctrObj) : controller(std::move(ctrObj)) {}
@@ -52,8 +52,8 @@ void UI::ownerMenu() {
         cout << string(30, '\n');
 
         try {
-            optionInt = std::stoi(optionStr);
-        } catch (std::exception &e) {
+            optionInt = stoi(optionStr);
+        } catch (exception &e) {
             optionInt = -1;
         }
 
@@ -130,8 +130,8 @@ void UI::customerMenu() {
         cout << string(30, '\n');
 
         try {
-            optionInt = std::stoi(optionStr);
-        } catch (std::exception &e) {
+            optionInt = stoi(optionStr);
+        } catch (exception &e) {
             optionInt = -1;
         }
 
@@ -175,69 +175,73 @@ void UI::customerMenu() {
 
 
 void UI::addScooter() {
-    // TODO - implementation
     cout << "~~~~~  Adding a scooter  ~~~~~\n\n";
+
     string id, model, lastLocation, user_input;
     int year, month, day, mileage;
     Status status;
+
     cin.ignore();
+
     cout << "Type the ID of the new scooter (3 letters):";
     getline(cin, id);
+
     cout << "Type the model of the new scooter:";
     getline(cin, model);
+
     cout << "Type the commission date of the new scooter:\n";
     cout << "Year:";
     getline(cin, user_input);
     year = stoi(user_input);
     cout << "Month:";
     getline(cin, user_input);
-    month = std::stoi(user_input);
+    month = stoi(user_input);
     cout << "Day:";
     getline(cin, user_input);
-    day = std::stoi(user_input);
-    cout
-            << "Type the mileage of the new scooter:";  //asta tehnically ar trebui sa fie 0, da sa zicem ca poate fi si second hand
+    day = stoi(user_input);
+
+    //asta tehnically ar trebui sa fie 0, da sa zicem ca poate fi si second hand
+    cout << "Type the mileage of the new scooter:";
     getline(cin, user_input);
-    mileage = std::stoi(user_input);
+    mileage = stoi(user_input);
+
     cout << "Type the last location of the new scooter:";  //asta nu cred ca trebe but still
     getline(cin, lastLocation);
+
     cout << "Type the status of the new scooter (parked, reserved, in use, in maintenance, out of service):";
     getline(cin, user_input);
+
+    // TODO - mai frumos cumva (map)
     if (user_input == "parked") {
-        status = Status::parked;
+        status = parked;
     } else if (user_input == "reserved") {
-        status = Status::reserved;
+        status = reserved;
     } else if (user_input == "in use") {
-        status = Status::inUse;
+        status = inUse;
     } else if (user_input == "in maintenance") {
-        status = Status::inMaintenance;
+        status = inMaintenance;
     } else if (user_input == "out of service") {
-        status = Status::outOfService;
+        status = outOfService;
     }
 
     controller->add(id, model, {year, month, day}, mileage, lastLocation, status);
 
-    cout << std::endl;
-    cout << "The scooter has been added to the repository!\n" << std::endl;
-//    break;
+    cout << "\nThe scooter has been added to the repository!\n\n";
 }
 
 
 void UI::deleteScooter() {
-    // TODO - implementation
     cout << "~~~~~  Removing a scooter  ~~~~~\n\n";
+
     string id;
     cout << "Type the id of the scooter to be removed:";
-    cin.ignore();  //for some reason fara cin.ignore ia input aiurea sau chiar nu ia input deloc
+    cin.ignore();
     getline(cin, id);
-    if (controller->remove(id)) {
-        cout << std::endl;
-        cout << "The scooter has been removed!\n";
-    } else {
-        cout << std::endl;
-        std::cout << "No scooter id matched your input!\n";
-    }
-//    break;
+
+    if (controller->remove(id))
+        cout << "\nThe scooter has been removed!\n";
+    else
+        cout << "\nNo scooter id matched your input!\n";
 }
 
 
@@ -245,23 +249,32 @@ void UI::editScooter() {
     // TODO - implementation
     // edit nu updateaza momentan atributele :(
     cout << "~~~~~  Editing a scooter  ~~~~~\n\n";
+
     string id, newLastLocation, user_input, choice;
     int newMileage;
     Status newStatus;
+
     cout << "Type the id of the scooter:";
     cin.ignore();
     getline(cin, id);
-    Scooter &scooter = controller->find(id);
+    Scooter *scooter = controller->find(id);
+
+    // TODO - nu vrei sa punrm numa un scooterToString ?
+
     cout << "Here is the selected scooter:\n\n";
-    cout << "Scooter ID: " << id << std::endl;
-    cout << "Model: " << scooter.getModel() << std::endl;
-    cout << "Commission Date: " << scooter.getCommissionDate().year << "/" <<
-         scooter.getCommissionDate().month << "/" << scooter.getCommissionDate().day << std::endl;
-    cout << "Mileage: " << scooter.getMileage() << std::endl;
-    cout << "Last Location: " << scooter.getLastLocation() << std::endl;
-    cout << "Status: " << scooter.getStatus() << std::endl << std::endl;
+    cout << "Scooter ID: " << id << '\n';
+    cout << "Model: " << scooter->getModel() << '\n';
+    cout << "Commission Date: " << scooter->getCommissionDate().year << "/" <<
+         scooter->getCommissionDate().month << "/" << scooter->getCommissionDate().day << '\n';
+    cout << "Mileage: " << scooter->getMileage() << '\n';
+    cout << "Last Location: " << scooter->getLastLocation() << '\n';
+    cout << "Status: " << scooter->getStatus() << "\n\n";
+
     cout << "What would you like to edit to this scooter? (Mileage / Last Location / Status):";
     getline(cin, choice);
+
+
+    // TODO - switch
     if (choice == "Mileage") {
         cout << "Type the new mileage of the scooter:";
         cin.ignore();
@@ -281,20 +294,21 @@ void UI::editScooter() {
         getline(cin, user_input);
         cout << "Type the new status of the new scooter (parked, reserved, in use, in maintenance, out of service):";
         getline(cin, user_input);
+
+        // TODO - acelasi lucru ca mai sus
         if (user_input == "parked") {
-            newStatus = Status::parked;
+            newStatus = parked;
         } else if (user_input == "reserved") {
-            newStatus = Status::reserved;
+            newStatus = reserved;
         } else if (user_input == "in use") {
-            newStatus = Status::inUse;
+            newStatus = inUse;
         } else if (user_input == "in maintenance") {
-            newStatus = Status::inMaintenance;
+            newStatus = inMaintenance;
         } else if (user_input == "out of service") {
-            newStatus = Status::outOfService;
+            newStatus = outOfService;
         }
         controller->editStatus(id, newStatus);
     }
-//    break;
 }
 
 
@@ -315,7 +329,7 @@ void UI::viewScooters() {
     vector<Scooter> sortedScooters = controller->sortedByCommissionDate();
 
     for (int index = 0; index < sortedScooters.size(); index++) {
-        cout << index << ". " << scooterToString(sortedScooters[index]) << "\n";
+        cout << index + 1 << ". " << scooterToString(sortedScooters[index]) << "\n";
     }
 
     cout << '\n';
@@ -323,7 +337,23 @@ void UI::viewScooters() {
 
 
 void UI::reserveScooter() {
-    // TODO - implementation
+    cout << "~~~~ Reserve a scooter ~~~~\n\n";
+
+    string id;
+    cin.ignore();
+    cout << "Enter the id of the scooter you want to reserve: ";
+    getline(cin, id);
+
+    try {
+        controller->find(id);
+    } catch (exception &e) {
+        cout << "The scooter with the id: " << id << " was not found\n";
+    }
+
+    if (controller->reserveScooter(id))
+        cout << "Scooter successfully reserved\n";
+    else
+        cout << "Scooter could not be reserved.\n";
 }
 
 

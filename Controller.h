@@ -34,7 +34,7 @@ namespace Controller {
 
         bool remove(const string &id);
 
-        Scooter &find(const string &id);
+        Scooter *find(const string &id);
 
         void editMileage(const string &id, const int &newMileage);
 
@@ -45,5 +45,7 @@ namespace Controller {
         vector<Scooter> getAll();
 
         vector<Scooter> sortedByCommissionDate();
+
+        bool reserveScooter(const string &id);
     };
 }
