@@ -24,9 +24,10 @@ void Repo::generateDummyData() {
 
 }
 
-bool Repo::remove (const std::string& id){
-    for (auto itr = scooterVector.begin(); itr < scooterVector.end(); itr++){
-        if (itr->getId() == id){
+
+bool Repo::remove(const std::string &id) {
+    for (auto itr = scooterVector.begin(); itr < scooterVector.end(); itr++) {
+        if (itr->getId() == id) {
             scooterVector.erase(itr);
             return true;
         }
@@ -34,10 +35,11 @@ bool Repo::remove (const std::string& id){
     return false;
 }
 
-std::vector<Scooter> Repo::get_all(){
+
+vector<Scooter> Repo::getAll() {
     return scooterVector;
 }
 
-void Repo::generateDummyData() {
-    // TODO - add 10 default scooters
+void Repo::add(const Scooter &new_scooter) {
+    scooterVector.push_back(new_scooter);
 }
