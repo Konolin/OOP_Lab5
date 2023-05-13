@@ -21,22 +21,23 @@ void Repo::generateDummyData() {
     scooterVector.push_back(Scooter("KOF", "Paak", {8, 9, 2022}, 123, "E60", inUse));
     scooterVector.push_back(Scooter("XIQ", "BMW", {25, 11, 2020}, 140, "La cineva acasa", inMaintenance));
     scooterVector.push_back(Scooter("IWN", "Tesla", {11, 12, 2021}, 941, "uhaaaaa", reserved));
+
 }
 
-
-bool Repo::addScooter(const Scooter& newScooter) {
-    // TODO - implementation
+bool Repo::remove (const std::string& id){
+    for (auto itr = scooterVector.begin(); itr < scooterVector.end(); itr++){
+        if (itr->getId() == id){
+            scooterVector.erase(itr);
+            return true;
+        }
+    }
+    return false;
 }
 
-
-bool Repo::deleteScooter(const Scooter &deletedScooter) {
-    // TODO - implementation
+std::vector<Scooter> Repo::get_all(){
+    return scooterVector;
 }
 
-
-bool Repo::editScooter(Scooter &deletedScooter) {
-    // TODO - implementation
+void Repo::generateDummyData() {
+    // TODO - add 10 default scooters
 }
-
-
-vector<Scooter> Repo::getAll() { return scooterVector; }
