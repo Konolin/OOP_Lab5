@@ -4,7 +4,7 @@
 
 
 using UserInterface::UI, std::cout, std::cin, UserInterface::owner, UserInterface::customer, std::to_string,
-      Domain::inUse, Domain::inMaintenance, Domain::parked, Domain::reserved, Domain::outOfService;
+        Domain::inUse, Domain::inMaintenance, Domain::parked, Domain::reserved, Domain::outOfService;
 
 
 UI::UI(shared_ptr<Ctr> ctrObj) : controller(std::move(ctrObj)) {}
@@ -310,12 +310,15 @@ void UI::filterScooters() {
 
 void UI::viewScooters() {
     cout << string(30, '\n');
+    cout << "~~~~View scooters sorted by commission date~~~~\n\n";
 
-    vector<Scooter> sortedScooters = controller->sortedByAgeScooters();
+    vector<Scooter> sortedScooters = controller->sortedByCommissionDate();
 
     for (int index = 0; index < sortedScooters.size(); index++) {
         cout << index << ". " << scooterToString(sortedScooters[index]) << "\n";
     }
+
+    cout << '\n';
 }
 
 
@@ -328,6 +331,7 @@ void UI::useScooter() {
     // TODO - implementation
 }
 
+
 string UI::scooterToString(const Scooter &scooter) {
     string id = scooter.getId();
     string model = scooter.getModel();
@@ -336,14 +340,17 @@ string UI::scooterToString(const Scooter &scooter) {
     string lastLocation = scooter.getLastLocation();
     string status = statusToString(scooter.getStatus());
 
-    string scooterString = id + ' ' + model + ' ' + commissionDate + ' ' + mileage + ' ' + lastLocation + ' ' + status;
+    string scooterString =
+            id + ", " + model + ", " + commissionDate + ", " + mileage + ", " + lastLocation + ", " + status;
 
     return scooterString;
 }
 
+
 string UI::dateToString(const Date &date) {
-    return '{' + to_string(date.day) + ' ' + to_string(date.month) + ' ' + to_string(date.year) + '}';
+    return '{' + to_string(date.day) + ':' + to_string(date.month) + ':' + to_string(date.year) + '}';
 }
+
 
 string UI::statusToString(const Status &status) {
     switch (status) {

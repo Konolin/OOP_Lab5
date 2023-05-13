@@ -21,6 +21,8 @@ namespace Controller {
         static void dataCheck(const string &id, const string &model, Date commissionDate, int mileage,
                               const string &lastLocation, Status status);
 
+        static bool dateAscending(const Scooter& scooter1, const Scooter& scooter2);
+
     public:
         // constructor
         Ctr(shared_ptr<Repo> repoObj);
@@ -41,5 +43,7 @@ namespace Controller {
         void editStatus(const string &id, Status &newStatus);
 
         vector<Scooter> getAll();
+
+        vector<Scooter> sortedByCommissionDate();
     };
 }
