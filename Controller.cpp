@@ -53,11 +53,11 @@ void Ctr::add(const string& id, const string& model, const Date& commissionDate,
          const string& lastLocation, const Status& status){
     Scooter scooter(id, model, commissionDate, mileage, lastLocation, status);
     //dataCheck(id, model, commissionDate, mileage, lastLocation, status);
-    repository->add(scooter);
+//    repository->add(scooter);
 }
 
 bool Ctr::remove(const string& id){
-    return repository->remove(id);
+//    return repository->remove(id);
 }
 
 Scooter& Ctr::find(const string& id){
@@ -86,4 +86,20 @@ void Ctr::editStatus(const string &id, Status& newStatus) {
 
 vector<Scooter> Ctr::getAll() {
     return repository->getAll();
+}
+
+vector<Scooter> Ctr::sortedByCommissionDate() {
+    vector<Scooter> sortedVector = repository->getAll();
+    std::sort(sortedVector.begin(), sortedVector.end(), dateAscending);
+    return sortedVector;
+}
+
+bool Ctr::dateAscending(const Scooter& scooter1, const Scooter& scooter2) {
+    if (scooter1.getCommissionDate().year != scooter2.getCommissionDate().year)
+        return scooter1.getCommissionDate().year < scooter2.getCommissionDate().year;
+
+    if (scooter1.getCommissionDate().month != scooter2.getCommissionDate().month)
+        return scooter1.getCommissionDate().month < scooter2.getCommissionDate().month;
+
+    return scooter1.getCommissionDate().day < scooter2.getCommissionDate().day;
 }
