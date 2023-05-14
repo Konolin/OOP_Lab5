@@ -76,26 +76,21 @@ int Ctr::find(const string &id) {
 }
 
 
-void Ctr::editMileage(const string &id, const int &newMileage) {
-    Scooter scooter = repository->getScooter(find(id));
-    scooter.setMileage(newMileage);
+void Ctr::editMileage(const string &id, int newMileage) {
+    int scooterIndex = find(id);
+    repository->editMileage(scooterIndex, newMileage);
 }
 
 
 void Ctr::editLocation(const string &id, const string &newLastLocation) {
-    Scooter scooter = repository->getScooter(find(id));
-    scooter.setLastLocation(newLastLocation);
+    int scooterIndex = find(id);
+    repository->editLocation(scooterIndex, newLastLocation);
 }
 
 
 void Ctr::editStatus(const string &id, Status &newStatus) {
-    Scooter scooter = repository->getScooter(find(id));
-    scooter.setStatus(newStatus);
-}
-
-
-vector<Scooter> Ctr::getAll() {
-    return repository->getAll();
+    int scooterIndex = find(id);
+    repository->editStatus(scooterIndex, newStatus);
 }
 
 
