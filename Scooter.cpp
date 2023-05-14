@@ -1,7 +1,9 @@
 #include "Scooter.h"
 #include "Controller.h"
 
+
 using Domain::Scooter, Domain::Date, Domain::Status, Controller::Ctr, std::invalid_argument;
+
 
 Scooter::Scooter(const string &_id, const string &_model, Date _commissionDate, int _mileage,
                  const string &_lastLocation, Status _status) {
@@ -13,17 +15,24 @@ Scooter::Scooter(const string &_id, const string &_model, Date _commissionDate, 
     status = _status;
 }
 
+
 string Scooter::getId() const { return id; }
+
 
 string Scooter::getModel() const { return model; }
 
+
 Date Scooter::getCommissionDate() const { return commissionDate; }
+
 
 int Scooter::getMileage() const { return mileage; }
 
+
 string Scooter::getLastLocation() const { return lastLocation; }
 
+
 Status Scooter::getStatus() const { return status; }
+
 
 void Scooter::setId(const string &newId) {
     if (Ctr::hasThreeLetters(newId) && newId.size() == 3)
@@ -31,10 +40,12 @@ void Scooter::setId(const string &newId) {
     else throw invalid_argument("The id does not respect the convention (3 letters).");
 }
 
+
 void Scooter::setModel(const string &newModel) {
     if (!newModel.empty()) model = newModel;
     else throw invalid_argument("Model can not be empty.");
 }
+
 
 void Scooter::setCommissionDate(const Date &newCommissionDate) {
     if (newCommissionDate.day < 1 || newCommissionDate.day > 31)
@@ -53,19 +64,20 @@ void Scooter::setCommissionDate(const Date &newCommissionDate) {
     commissionDate = newCommissionDate;
 }
 
+
 void Scooter::setMileage(int newMileage) {
     if (newMileage > 0) mileage = newMileage;
     else throw invalid_argument("Mileage can not be negative.");
 }
+
 
 void Scooter::setLastLocation(const string &newLastLocation) {
     if (!newLastLocation.empty()) lastLocation = newLastLocation;
     else throw invalid_argument("The last location can not be empty.");
 }
 
-void Scooter::setStatus(Status newStatus) {
-    // TODO - check newStatus valid ?
+
+void Scooter::setStatus(const Status &newStatus) {
     status = newStatus;
 }
-
 
