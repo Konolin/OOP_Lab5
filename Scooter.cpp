@@ -81,3 +81,20 @@ void Scooter::setStatus(const Status &newStatus) {
     status = newStatus;
 }
 
+bool Scooter::operator==(const Scooter &other) {
+    if (id != other.id) return false;
+    if (model != other.model) return false;
+    if (commissionDate.day != other.commissionDate.day) return false;
+    if (commissionDate.month != other.commissionDate.month) return false;
+    if (commissionDate.year != other.commissionDate.year) return false;
+    if (mileage != other.mileage) return false;
+    if (lastLocation != other.lastLocation) return false;
+    if (status != other.status) return false;
+
+    return true;
+}
+
+bool Scooter::operator!=(const Scooter &other) {
+    return !operator==(other);
+}
+
