@@ -5,7 +5,7 @@
 #include "Scooter.h"
 
 
-using std::vector, Domain::Scooter;
+using std::vector, Domain::Scooter, Domain::Status;
 
 
 namespace Repository {
@@ -30,5 +30,11 @@ namespace Repository {
         void reserveScooter(int scooterIndex);
 
         void useScooter(int scooterIndex);
+
+        void editMileage(int index, int newMileage);
+
+        void editLocation(int index, const string &newLocation);
+
+        void editStatus(int index, const Status &newStatus);
     };
 }

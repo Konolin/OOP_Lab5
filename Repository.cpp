@@ -60,3 +60,15 @@ void Repo::reserveScooter(int scooterIndex) {
 void Repo::useScooter(int scooterIndex) {
     scooterVector[scooterIndex].setStatus(inUse);
 }
+
+void Repo::editMileage(int index, int newMileage) {
+    scooterVector[index].setMileage(newMileage);
+}
+
+void Repo::editLocation(int index, const string &newLocation) {
+    scooterVector[index].setLastLocation(newLocation);
+}
+
+void Repo::editStatus(int index, const Status &newStatus) {
+    scooterVector[index].setStatus(newStatus);
+}

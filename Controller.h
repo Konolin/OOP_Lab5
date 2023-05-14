@@ -36,13 +36,11 @@ namespace Controller {
 
         int find(const string &id);
 
-        void editMileage(const string &id, const int &newMileage);
+        void editMileage(const string &id, int newMileage);
 
         void editLocation(const string &id, const string &newLastLocation);
 
         void editStatus(const string &id, Status &newStatus);
-
-        vector<Scooter> getAll();
 
         vector<Scooter> sortedByCommissionDate();
 
