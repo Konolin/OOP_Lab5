@@ -1,6 +1,5 @@
 #include "Controller.h"
 #include <utility>
-#include <iostream>
 
 
 using Controller::Ctr, std::invalid_argument, Domain::parked, Domain::reserved;
@@ -66,11 +65,11 @@ bool Ctr::remove(const string &id) {
 }
 
 
-Scooter *Ctr::find(const string &id) {
-    for (auto &scooter: repository->getAll()) {
-        if (scooter.getId() == id) {
-            std::cout << "Address stored in repository: " << &scooter << std::endl;
-            return &scooter;
+int Ctr::find(const string &id) {
+    vector<Scooter> scooterVector = repository->getAll();
+    for (int i = 0; i < scooterVector.size(); i++) {
+        if (scooterVector[i].getId() == id) {
+            return i;
         }
     }
     throw std::runtime_error("Scooter not found");
@@ -78,20 +77,20 @@ Scooter *Ctr::find(const string &id) {
 
 
 void Ctr::editMileage(const string &id, const int &newMileage) {
-    Scooter *scooter = find(id);
-    scooter->setMileage(newMileage);
+    Scooter scooter = repository->getScooter(find(id));
+    scooter.setMileage(newMileage);
 }
 
 
 void Ctr::editLocation(const string &id, const string &newLastLocation) {
-    Scooter *scooter = find(id);
-    scooter->setLastLocation(newLastLocation);
+    Scooter scooter = repository->getScooter(find(id));
+    scooter.setLastLocation(newLastLocation);
 }
 
 
 void Ctr::editStatus(const string &id, Status &newStatus) {
-    Scooter *scooter = find(id);
-    scooter->setStatus(newStatus);
+    Scooter scooter = repository->getScooter(find(id));
+    scooter.setStatus(newStatus);
 }
 
 
@@ -118,13 +117,33 @@ bool Ctr::dateAscending(const Scooter &scooter1, const Scooter &scooter2) {
 }
 
 bool Ctr::reserveScooter(const string &id) {
-    Scooter *scooter = find(id);
+    try {
+        int scooterIndex = find(id);
+        Scooter scooter = repository->getScooter(scooterIndex);
 
-    if (scooter->getStatus() == parked) {
-        scooter->setStatus(reserved);
-        return true;
+        if (scooter.getStatus() == parked) {
+            repository->reserveScooter(scooterIndex);
+            return true;
+        }
+        return false;
+    } catch (std::exception &e) {
+        return false;
     }
-    return false;
+}
+
+bool Controller::Ctr::useScooter(const string &id) {
+    try {
+        int scooterIndex = find(id);
+        Scooter scooter = repository->getScooter(scooterIndex);
+
+        if (scooter.getStatus() == parked) {
+            repository->useScooter(scooterIndex);
+            return true;
+        }
+        return false;
+    } catch (std::exception &e) {
+        return false;
+    }
 }
 
 
