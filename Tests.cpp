@@ -1,9 +1,10 @@
 #include "Tests.h"
 #include "Scooter.h"
+#include "Repository.h"
 #include <iostream>
 #include <cassert>
 
-using Test::Tests, std::cout, Domain::Scooter, std::exception;
+using Test::Tests, std::cout, Domain::Scooter, std::exception, Repository::Repo;
 
 void Tests::Tests::testAll() {
     cout << "Starting all tests...\n\n";
@@ -80,13 +81,55 @@ void Tests::testDomain() {
     } catch (exception &e) {
         assert(true);
     }
-    // TODO - check invalid status
 
     cout << "Domain test done!\n\n";
 }
 
 void Tests::testRepository() {
     cout << "Starting repository test...\n";
+
+    // check the original size of the vector from the array
+    Repo repository;
+    assert(repository.getAll().size() == 11);
+
+    // check the add method
+    Scooter scooter("IFW", "MyriaMM", {1, 1, 2022}, 931, "Centru", Domain::inUse);
+    repository.add(scooter);
+    assert(repository.getAll().size() == 12);
+    assert(repository.getAll().back() == scooter);
+
+    // check the getScooter method
+    assert(repository.getScooter(repository.getAll().size() - 1) == scooter);
+
+    // check the remove method
+    assert(repository.remove(repository.getAll().size() - 1) == scooter);
+    assert(repository.getAll().size() == 11);
+
+    // check the reserveScooter method
+    repository.add(Scooter("IFW", "MyriaMM", {1, 1, 2022}, 931, "Centru", Domain::parked));
+    repository.reserveScooter(repository.getAll().size() - 1);
+    scooter = repository.getScooter(repository.getAll().size() - 1);
+    assert(scooter.getStatus() == Domain::reserved);
+
+    // check the useScooter method
+    repository.useScooter(repository.getAll().size() - 1);
+    scooter = repository.getScooter(repository.getAll().size() - 1);
+    assert(scooter.getStatus() == Domain::inUse);
+
+    // check editMileage method
+    repository.editMileage(repository.getAll().size() - 1, 420);
+    scooter = repository.getScooter(repository.getAll().size() - 1);
+    assert(scooter.getMileage() == 420);
+
+    // check editLocation method
+    repository.editLocation(repository.getAll().size() - 1, "Str. Horea nr. 106");
+    scooter = repository.getScooter(repository.getAll().size() - 1);
+    assert(scooter.getLastLocation() == "Str. Horea nr. 106");
+
+    // check the editStatus method
+    repository.editStatus(repository.getAll().size() - 1, Domain::inMaintenance);
+    scooter = repository.getScooter(repository.getAll().size() - 1);
+    assert(scooter.getStatus() == Domain::inMaintenance);
 
     cout << "Repository test done!\n\n";
 }

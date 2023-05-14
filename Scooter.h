@@ -51,6 +51,12 @@ namespace Domain {
 
         void setLastLocation(const string &newLastLocation);
 
-        void setStatus(Status newStatus);
+        void setStatus(const Status &newStatus);
+
+        // overload for the == operator
+        bool operator==(const Scooter &other);
+
+        // overload for the != operator
+        bool operator!=(const Scooter &other);
     };
 }

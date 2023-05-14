@@ -61,7 +61,13 @@ void Ctr::add(const string &id, const string &model, const Date &commissionDate,
 
 
 bool Ctr::remove(const string &id) {
-    return repository->remove(id);
+    try {
+        int index = find(id);
+        repository->remove(index);
+        return true;
+    } catch (std::exception &e) {
+        return false;
+    }
 }
 
 

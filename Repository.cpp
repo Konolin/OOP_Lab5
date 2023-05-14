@@ -2,7 +2,8 @@
 #include <iostream>
 
 
-using Repository::Repo, Domain::inUse, Domain::inMaintenance, Domain::reserved, Domain::outOfService, Domain::parked;
+using Repository::Repo, Domain::inUse, Domain::inMaintenance, Domain::reserved, Domain::outOfService, Domain::parked,
+        std::invalid_argument;
 
 
 Repo::Repo() {
@@ -26,14 +27,15 @@ void Repo::generateDummyData() {
 }
 
 
-bool Repo::remove(const std::string &id) {
-    for (auto itr = scooterVector.begin(); itr < scooterVector.end(); itr++) {
-        if (itr->getId() == id) {
-            scooterVector.erase(itr);
-            return true;
-        }
-    }
-    return false;
+void Repo::add(const Scooter &new_scooter) {
+    scooterVector.push_back(new_scooter);
+}
+
+
+Scooter Repo::remove(int index) {
+    Scooter removedScooter = scooterVector[index];
+    scooterVector.erase(scooterVector.begin() + index);
+    return removedScooter;
 }
 
 
@@ -42,13 +44,10 @@ vector<Scooter> Repo::getAll() {
 }
 
 
-void Repo::add(const Scooter &new_scooter) {
-    scooterVector.push_back(new_scooter);
-}
-
-
-Scooter Repo::getScooter(int scooterIndex) {
-    return scooterVector[scooterIndex];
+Scooter Repo::getScooter(int index) {
+    if (index > 0 && index < scooterVector.size())
+        return scooterVector[index];
+    else throw invalid_argument("Invalid index.");
 }
 
 
@@ -61,14 +60,18 @@ void Repo::useScooter(int scooterIndex) {
     scooterVector[scooterIndex].setStatus(inUse);
 }
 
+
 void Repo::editMileage(int index, int newMileage) {
     scooterVector[index].setMileage(newMileage);
 }
+
 
 void Repo::editLocation(int index, const string &newLocation) {
     scooterVector[index].setLastLocation(newLocation);
 }
 
+
 void Repo::editStatus(int index, const Status &newStatus) {
     scooterVector[index].setStatus(newStatus);
 }
+
