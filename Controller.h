@@ -15,8 +15,6 @@ namespace Controller {
 
     class Ctr {
     private:
-        shared_ptr<Repo> repository;
-
         // check if the data given as parameter is valid
         static void dataCheck(const string &id, const string &model, Date commissionDate, int mileage,
                               const string &lastLocation, Status status);
@@ -24,6 +22,8 @@ namespace Controller {
         static bool dateAscending(const Scooter& scooter1, const Scooter& scooter2);
 
     public:
+        shared_ptr<Repo> repository;
+
         // constructor
         Ctr(shared_ptr<Repo> repoObj);
 
@@ -34,7 +34,7 @@ namespace Controller {
 
         bool remove(const string &id);
 
-        Scooter *find(const string &id);
+        int find(const string &id);
 
         void editMileage(const string &id, const int &newMileage);
 
@@ -47,5 +47,7 @@ namespace Controller {
         vector<Scooter> sortedByCommissionDate();
 
         bool reserveScooter(const string &id);
+
+        bool useScooter(const string &id);
     };
 }

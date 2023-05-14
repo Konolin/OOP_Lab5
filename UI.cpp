@@ -11,20 +11,26 @@ UI::UI(shared_ptr<Ctr> ctrObj) : controller(std::move(ctrObj)) {}
 
 
 void UI::startUI() {
+    cout << string(30, '\n');
+
     string userInput;
 
     cout << "Select a role (owner / customer): ";
     cin >> userInput;
 
-    // TODO - wrong input check
-    if (userInput == "admin") {
+    if (userInput == "owner") {
         userRole = owner;
         ownerMenu();
-    } else {
+    } else if (userInput == "customer"){
         userRole = customer;
         customerMenu();
+    } else {
+        cin.ignore();
+        cout << "Invalid input, try again.\n";
+        cout << "Press any key to continue...";
+        cin.get();
+        startUI();
     }
-
 }
 
 
@@ -200,18 +206,16 @@ void UI::addScooter() {
     getline(cin, user_input);
     day = stoi(user_input);
 
-    //asta tehnically ar trebui sa fie 0, da sa zicem ca poate fi si second hand
     cout << "Type the mileage of the new scooter:";
     getline(cin, user_input);
     mileage = stoi(user_input);
 
-    cout << "Type the last location of the new scooter:";  //asta nu cred ca trebe but still
+    cout << "Type the last location of the new scooter:";
     getline(cin, lastLocation);
 
     cout << "Type the status of the new scooter (parked, reserved, in use, in maintenance, out of service):";
     getline(cin, user_input);
 
-    // TODO - mai frumos cumva (map)
     if (user_input == "parked") {
         status = parked;
     } else if (user_input == "reserved") {
@@ -257,18 +261,16 @@ void UI::editScooter() {
     cout << "Type the id of the scooter:";
     cin.ignore();
     getline(cin, id);
-    Scooter *scooter = controller->find(id);
-
-    // TODO - nu vrei sa punrm numa un scooterToString ?
+    Scooter scooter = controller->repository->getScooter(controller->find(id));
 
     cout << "Here is the selected scooter:\n\n";
     cout << "Scooter ID: " << id << '\n';
-    cout << "Model: " << scooter->getModel() << '\n';
-    cout << "Commission Date: " << scooter->getCommissionDate().year << "/" <<
-         scooter->getCommissionDate().month << "/" << scooter->getCommissionDate().day << '\n';
-    cout << "Mileage: " << scooter->getMileage() << '\n';
-    cout << "Last Location: " << scooter->getLastLocation() << '\n';
-    cout << "Status: " << scooter->getStatus() << "\n\n";
+    cout << "Model: " << scooter.getModel() << '\n';
+    cout << "Commission Date: " << scooter.getCommissionDate().year << "/" <<
+         scooter.getCommissionDate().month << "/" << scooter.getCommissionDate().day << '\n';
+    cout << "Mileage: " << scooter.getMileage() << '\n';
+    cout << "Last Location: " << scooter.getLastLocation() << '\n';
+    cout << "Status: " << statusToString(scooter.getStatus()) << "\n\n";
 
     cout << "What would you like to edit to this scooter? (Mileage / Last Location / Status):";
     getline(cin, choice);
@@ -295,7 +297,6 @@ void UI::editScooter() {
         cout << "Type the new status of the new scooter (parked, reserved, in use, in maintenance, out of service):";
         getline(cin, user_input);
 
-        // TODO - acelasi lucru ca mai sus
         if (user_input == "parked") {
             newStatus = parked;
         } else if (user_input == "reserved") {
@@ -342,23 +343,27 @@ void UI::reserveScooter() {
     string id;
     cin.ignore();
     cout << "Enter the id of the scooter you want to reserve: ";
-    getline(cin, id);
-
-    try {
-        controller->find(id);
-    } catch (exception &e) {
-        cout << "The scooter with the id: " << id << " was not found\n";
-    }
+    cin >> id;
 
     if (controller->reserveScooter(id))
-        cout << "Scooter successfully reserved\n";
+        cout << "Scooter successfully reserved\n\n";
     else
-        cout << "Scooter could not be reserved.\n";
+        cout << "Scooter could not be reserved.\n\n";
 }
 
 
 void UI::useScooter() {
-    // TODO - implementation
+    cout << "~~~~ Use a scooter ~~~~\n\n";
+
+    string id;
+    cin.ignore();
+    cout << "Enter the id of the scooter you want to use: ";
+    cin >> id;
+
+    if (controller->useScooter(id))
+        cout << "Scooter is now successfully in use.\n\n";
+    else
+        cout << "Scooter can not be used right now.\n\n";
 }
 
 

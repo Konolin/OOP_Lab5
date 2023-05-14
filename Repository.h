@@ -24,5 +24,11 @@ namespace Repository {
         bool remove(const std::string &id);
 
         std::vector<Scooter> getAll();
+
+        Scooter getScooter(int scooterIndex);
+
+        void reserveScooter(int scooterIndex);
+
+        void useScooter(int scooterIndex);
     };
 }

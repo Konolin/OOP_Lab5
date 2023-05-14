@@ -1,4 +1,5 @@
 #include "Repository.h"
+#include <iostream>
 
 
 using Repository::Repo, Domain::inUse, Domain::inMaintenance, Domain::reserved, Domain::outOfService, Domain::parked;
@@ -40,6 +41,22 @@ vector<Scooter> Repo::getAll() {
     return scooterVector;
 }
 
+
 void Repo::add(const Scooter &new_scooter) {
     scooterVector.push_back(new_scooter);
+}
+
+
+Scooter Repo::getScooter(int scooterIndex) {
+    return scooterVector[scooterIndex];
+}
+
+
+void Repo::reserveScooter(int scooterIndex) {
+    scooterVector[scooterIndex].setStatus(reserved);
+}
+
+
+void Repo::useScooter(int scooterIndex) {
+    scooterVector[scooterIndex].setStatus(inUse);
 }
