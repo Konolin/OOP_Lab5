@@ -131,6 +131,19 @@ void Tests::testRepository() {
     scooter = repository.getScooter(repository.getAll().size() - 1);
     assert(scooter.getStatus() == Domain::inMaintenance);
 
+    // TODO - CATA SA VERIFICI :) PUP DULCE
+    // check the search by location method
+    // no ideea daca am facut bine dar ma plictiseam
+    vector<Scooter> scooters;
+    scooters = repository.search("Sibiu");
+    assert(scooters[0].getId()=="OCA");
+
+    // check the filter by date method
+    //again chiar no idea daca e bn si nu am cum sa rulez sa verific pentru ca laptopul meu nu vrea sa ma lase
+    scooters = repository.filterScooterDate({1, 1, 2021});
+    assert(scooters.size()==2);
+
+
     cout << "Repository test done!\n\n";
 }
 

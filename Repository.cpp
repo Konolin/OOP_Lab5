@@ -75,9 +75,15 @@ void Repo::editStatus(int index, const Status &newStatus) {
     scooterVector[index].setStatus(newStatus);
 }
 
+<<<<<<< HEAD
 vector<Scooter> Repo::search(const string& input) {
     //if the input is an empty vector it returns all the fruits
     if (input.empty())
+=======
+vector<Scooter> Repo::search(string input) {
+    //if the input is an empty vector it returns all the fruits
+    if (input == "")
+>>>>>>> master
         return scooterVector;
     vector<Scooter> scooters;
     //searches for the string we gave in the names of all the vectrors
@@ -124,4 +130,9 @@ vector<Scooter> Repo::filterScooterMileage(int mileage) {
             scooters.push_back(scooter);
     }
     return scooters;
+<<<<<<< HEAD
 }
+=======
+}
+
+>>>>>>> master

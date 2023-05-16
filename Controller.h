@@ -48,10 +48,18 @@ namespace Controller {
 
         bool useScooter(const string &id);
 
+<<<<<<< HEAD
         vector<Scooter> search(const string& input);
+=======
+        vector<Scooter> search(string input);
+>>>>>>> master
 
         vector<Scooter> filterScooterDate(Date data);
 
         vector<Scooter> filterScooterMileage(int mileage);
+<<<<<<< HEAD
     };
+=======
+        };
+>>>>>>> master
 }
