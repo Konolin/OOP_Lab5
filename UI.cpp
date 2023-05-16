@@ -9,6 +9,7 @@ using UserInterface::UI, std::cout, std::cin, UserInterface::owner, UserInterfac
 
 UI::UI(shared_ptr<Ctr> ctrObj) : controller(std::move(ctrObj)) {}
 
+// TODO - la unele optiuni trebuie dat enter de mai multe ori pentru a iesi din meniu
 
 void UI::startUI() {
     cout << string(30, '\n');
@@ -250,8 +251,7 @@ void UI::deleteScooter() {
 
 
 void UI::editScooter() {
-    // TODO - implementation
-    // edit nu updateaza momentan atributele :(
+    // TODO - la location si mileage nu se salveaza primul caracter (ex ptr 123 -> 23)
     cout << "~~~~~  Editing a scooter  ~~~~~\n\n";
 
     string id, newLastLocation, user_input, choice;
@@ -291,6 +291,7 @@ void UI::editScooter() {
         controller->editLocation(id, newLastLocation);
     }
     if (choice == "Status") {
+        // TODO - de ce is 2 input-uri?
         cout << "Type the new status of the scooter:";
         cin.ignore();
         getline(cin, user_input);
@@ -325,7 +326,7 @@ void UI::filterScooters() {
 
 void UI::viewScooters() {
     cout << string(30, '\n');
-    cout << "~~~~View scooters sorted by commission date~~~~\n\n";
+    cout << "~~~~ View scooters sorted by commission date ~~~~\n\n";
 
     vector<Scooter> sortedScooters = controller->sortedByCommissionDate();
 
