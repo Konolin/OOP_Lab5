@@ -315,12 +315,38 @@ void UI::editScooter() {
 
 
 void UI::searchByLocation() {
-    // TODO - implementation
+    string input;
+    cout<<"enter the location you want to search scooters in: "<<std::endl;
+    cin>>input;
+    for(Scooter& scooter: controller->search(input)) {
+        cout << scooterToString(scooter) << '\n';
+    }
 }
 
 
 void UI::filterScooters() {
-    // TODO - implementation
+    int input;
+    int mileage;
+    Date commissiondate;
+    cout<<"would you like to filter scooters by: "<<std::endl<<"1. commission date"<<std::endl<<"2. mileage"<<std::endl;
+    if(input == 1) {
+        cout << "filter all the scooters with the comission date befor: \n day:";
+        cin >> commissiondate.day;
+        cout << "month: " << std::endl;
+        cin >> commissiondate.month;
+        cout << "year: ";
+        cin >> commissiondate.year;
+        for (Scooter &scooter: controller->filterScooterDate(commissiondate)) {
+            cout << scooterToString(scooter) << '\n';
+        }
+    }
+    else{
+        cout << "filter all the scooters with the mileage under: ";
+        cin >> mileage;
+        for (Scooter &scooter: controller->filterScooterMileage(mileage)) {
+            cout << scooterToString(scooter) << '\n';
+        }
+    }
 }
 
 

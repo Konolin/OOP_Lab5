@@ -47,5 +47,11 @@ namespace Controller {
         bool reserveScooter(const string &id);
 
         bool useScooter(const string &id);
+
+        vector<Scooter> search(const string& input);
+
+        vector<Scooter> filterScooterDate(Date data);
+
+        vector<Scooter> filterScooterMileage(int mileage);
     };
 }

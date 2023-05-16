@@ -147,4 +147,13 @@ bool Controller::Ctr::useScooter(const string &id) {
     }
 }
 
+vector<Scooter> Ctr::search(const string& input){
+    return repository->search(input);
+}
 
+vector<Scooter> Ctr::filterScooterDate(Date data){
+    return repository->filterScooterDate(data);
+}
+vector<Scooter> Ctr::filterScooterMileage(int mileage){
+    return repository->filterScooterMileage(mileage);
+}
