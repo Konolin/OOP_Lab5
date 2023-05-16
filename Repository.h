@@ -26,7 +26,7 @@ namespace Repository {
         Scooter remove(int index);
 
         // returns the vector of scooters
-        std::vector<Scooter> getAll();
+        vector<Scooter> getAll();
 
         // returns the scooter with the corresponding index
         Scooter getScooter(int index);
@@ -45,5 +45,14 @@ namespace Repository {
 
         // changes the status of a scooter
         void editStatus(int index, const Status &newStatus);
-    };
+
+        //searches for the scooters by location
+        vector<Scooter> search(string input);
+
+        //filters the scooters by comission date
+        vector<Scooter> filterScooterDate(Domain::Date data);
+
+        //filters the scooters by mileage
+        vector<Scooter> filterScooterMileage(int mileage);
+};
 }

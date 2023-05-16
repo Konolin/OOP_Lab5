@@ -314,12 +314,44 @@ void UI::editScooter() {
 
 
 void UI::searchByLocation() {
-    // TODO - implementation
+    string input;
+    cout<<"enter the location you want to search scooters in: "<<std::endl;
+    cin>>input;
+    for(Scooter& scooter: controller->search(input)) {
+        printScooter(scooter);
+    }
+}
+
+void UI::printScooter(Scooter scooter){
+    cout<<"id: "<<scooter.getId()<<", model: "<<scooter.getModel()<<", commission date: "<<scooter.getCommissionDate().day;
+    cout<<"."<<scooter.getCommissionDate().month<<"."<<scooter.getCommissionDate().year<<", mileage: "<<scooter.getMileage();
+    cout<<", last location: "<<scooter.getLastLocation()<<", status: "<<scooter.getStatus()<<std::endl;
 }
 
 
 void UI::filterScooters() {
-    // TODO - implementation
+    int input;
+    int mileage;
+    Date commissiondate;
+    cout<<"would you like to filter scooters by: "<<std::endl<<"1. commission date"<<std::endl<<"2. mileage"<<std::endl;
+    if(input == 1) {
+        cout << "filter all the scooters with the comission date befor: \n day:";
+        cin >> commissiondate.day;
+        cout << "month: " << std::endl;
+        cin >> commissiondate.month;
+        cout << "year: ";
+        cin >> commissiondate.year;
+        for (Scooter &scooter: controller->filterScooterDate(commissiondate)) {
+            printScooter(scooter);
+        }
+    }
+    else{
+        cout << "filter all the scooters with the mileage under: ";
+        cin >> mileage;
+        for (Scooter &scooter: controller->filterScooterMileage(mileage)) {
+            printScooter(scooter);
+        }
+    }
 }
 
 

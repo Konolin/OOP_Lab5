@@ -1,5 +1,6 @@
 #include "Controller.h"
 #include <utility>
+#include <exception>
 
 
 using Controller::Ctr, std::invalid_argument, Domain::parked, Domain::reserved;
@@ -147,4 +148,13 @@ bool Controller::Ctr::useScooter(const string &id) {
     }
 }
 
+vector<Scooter> Controller::Ctr::search(string input){
+    return repository->search(input);
+}
 
+vector<Scooter> Controller::Ctr::filterScooterDate(Date data){
+    return repository->filterScooterDate(data);
+}
+vector<Scooter> Controller::Ctr::filterScooterMileage(int mileage){
+    return repository->filterScooterMileage(mileage);
+}
