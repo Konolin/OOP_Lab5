@@ -14,7 +14,7 @@ Repo::Repo() {
 void Repo::generateDummyData() {
     scooterVector.push_back(Scooter("IDK", "Myria", {1, 1, 2022}, 901, "Centru", inUse));
     scooterVector.push_back(Scooter("THA", "BMW", {2, 12, 2022}, 451, "Sectia 6", reserved));
-    scooterVector.push_back(Scooter("SWF", "Tesla", {3, 1, 2021}, 51, "Somes", inUse));
+    scooterVector.push_back(Scooter("SWF", "Tesla", {3, 1, 2021}, 51, "Somes", inMaintenance));
     scooterVector.push_back(Scooter("FXC", "NuStiu", {25, 5, 2022}, 94, "Buna Ziua", outOfService));
     scooterVector.push_back(Scooter("DWS", "Tesla", {1, 8, 2020}, 134, "Bulgaria", parked));
     scooterVector.push_back(Scooter("DAZ", "BMW", {16, 6, 2021}, 501, "Tarnava", outOfService));
@@ -75,15 +75,9 @@ void Repo::editStatus(int index, const Status &newStatus) {
     scooterVector[index].setStatus(newStatus);
 }
 
-<<<<<<< HEAD
 vector<Scooter> Repo::search(const string& input) {
     //if the input is an empty vector it returns all the fruits
     if (input.empty())
-=======
-vector<Scooter> Repo::search(string input) {
-    //if the input is an empty vector it returns all the fruits
-    if (input == "")
->>>>>>> master
         return scooterVector;
     vector<Scooter> scooters;
     //searches for the string we gave in the names of all the vectrors
@@ -130,9 +124,4 @@ vector<Scooter> Repo::filterScooterMileage(int mileage) {
             scooters.push_back(scooter);
     }
     return scooters;
-<<<<<<< HEAD
 }
-=======
-}
-
->>>>>>> master

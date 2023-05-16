@@ -69,7 +69,5 @@ namespace UserInterface {
 
         // gets the role form the user and starts the menu
         void startUI();
-
-        void printScooter(Scooter scooter);
     };
 }

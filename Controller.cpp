@@ -9,6 +9,7 @@ using Controller::Ctr, std::invalid_argument, Domain::parked, Domain::reserved;
 Ctr::Ctr(shared_ptr<Repo> repoObj) : repository(std::move(repoObj)) {}
 
 
+// TODO - adauga asta undeva
 void Ctr::dataCheck(const string &id, const string &model, Date commissionDate, int mileage,
                     const string &lastLocation, Status status) {
     // check if the id has exactly 3 letters
@@ -40,8 +41,6 @@ void Ctr::dataCheck(const string &id, const string &model, Date commissionDate, 
     // check if lastLocation is valid
     if (lastLocation.empty())
         throw invalid_argument("The last location can not be an empty string.");
-
-    // TODO check status cumva idk inca cum
 }
 
 
@@ -56,7 +55,6 @@ bool Ctr::hasThreeLetters(const string &id) {
 void Ctr::add(const string &id, const string &model, const Date &commissionDate, int mileage,
               const string &lastLocation, const Status &status) {
     Scooter scooter(id, model, commissionDate, mileage, lastLocation, status);
-    //dataCheck(id, model, commissionDate, mileage, lastLocation, status);
     repository->add(scooter);
 }
 
@@ -118,6 +116,7 @@ bool Ctr::dateAscending(const Scooter &scooter1, const Scooter &scooter2) {
     return scooter1.getCommissionDate().day < scooter2.getCommissionDate().day;
 }
 
+
 bool Ctr::reserveScooter(const string &id) {
     try {
         int scooterIndex = find(id);
@@ -133,7 +132,7 @@ bool Ctr::reserveScooter(const string &id) {
     }
 }
 
-bool Controller::Ctr::useScooter(const string &id) {
+bool Ctr::useScooter(const string &id) {
     try {
         int scooterIndex = find(id);
         Scooter scooter = repository->getScooter(scooterIndex);
@@ -148,7 +147,7 @@ bool Controller::Ctr::useScooter(const string &id) {
     }
 }
 
-<<<<<<< HEAD
+
 vector<Scooter> Ctr::search(const string& input){
     return repository->search(input);
 }
@@ -159,15 +158,3 @@ vector<Scooter> Ctr::filterScooterDate(Date data){
 vector<Scooter> Ctr::filterScooterMileage(int mileage){
     return repository->filterScooterMileage(mileage);
 }
-=======
-vector<Scooter> Controller::Ctr::search(string input){
-    return repository->search(input);
-}
-
-vector<Scooter> Controller::Ctr::filterScooterDate(Date data){
-    return repository->filterScooterDate(data);
-}
-vector<Scooter> Controller::Ctr::filterScooterMileage(int mileage){
-    return repository->filterScooterMileage(mileage);
-}
->>>>>>> master

@@ -47,20 +47,12 @@ namespace Repository {
         void editStatus(int index, const Status &newStatus);
 
         //searches for the scooters by location
-<<<<<<< HEAD
         vector<Scooter> search(const string& input);
-=======
-        vector<Scooter> search(string input);
->>>>>>> master
 
         //filters the scooters by comission date
         vector<Scooter> filterScooterDate(Domain::Date data);
 
         //filters the scooters by mileage
         vector<Scooter> filterScooterMileage(int mileage);
-<<<<<<< HEAD
     };
-=======
 };
->>>>>>> master
-}
