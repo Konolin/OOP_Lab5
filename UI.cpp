@@ -257,6 +257,8 @@ void UI::deleteScooter() {
 
 
 // TODO - la location si mileage nu se salveaza primul caracter (ex ptr 123 -> 23)
+// TODO - clean up
+// TODO - unsuccessfully edited
 void UI::editScooter() {
     cout << "~~~~~  Editing a scooter  ~~~~~\n\n";
 

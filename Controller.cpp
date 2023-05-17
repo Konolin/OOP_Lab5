@@ -3,7 +3,7 @@
 #include <exception>
 
 
-using Controller::Ctr, std::invalid_argument, Domain::compareDateAscending;
+using Controller::Ctr, std::invalid_argument, Domain::compareDateAscending, std::exception;
 
 
 Ctr::Ctr(shared_ptr<Repo> repoObj) : repository(std::move(repoObj)) {}
@@ -66,28 +66,42 @@ bool Ctr::remove(const string &id) {
             repository->remove(scooter);
             return true;
         }
-    return true;
+    return false;
 }
 
 
-void Ctr::editMileage(const string &id, int newMileage) {
-    Scooter scooter = repository->getById(id);
-    scooter.setMileage(newMileage);
-    repository->updateEntity(scooter);
+bool Ctr::editMileage(const string &id, int newMileage) {
+    try {
+        Scooter scooter = repository->getById(id);
+        scooter.setMileage(newMileage);
+        repository->updateEntity(scooter);
+        return true;
+    } catch (exception &e) {
+        return false;
+    }
 }
 
 
-void Ctr::editLocation(const string &id, const string &newLastLocation) {
-    Scooter scooter = repository->getById(id);
-    scooter.setLastLocation(newLastLocation);
-    repository->updateEntity(scooter);
+bool Ctr::editLocation(const string &id, const string &newLastLocation) {
+    try {
+        Scooter scooter = repository->getById(id);
+        scooter.setLastLocation(newLastLocation);
+        repository->updateEntity(scooter);
+        return true;
+    } catch (exception &e) {
+        return false;
+    }
 }
 
 
 void Ctr::editStatus(const string &id, Status &newStatus) {
-    Scooter scooter = repository->getById(id);
-    scooter.setStatus(newStatus);
-    repository->updateEntity(scooter);
+    try {
+        Scooter scooter = repository->getById(id);
+        scooter.setStatus(newStatus);
+        repository->updateEntity(scooter);
+    } catch (exception &e) {
+        return;
+    }
 }
 
 

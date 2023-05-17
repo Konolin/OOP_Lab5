@@ -2,8 +2,7 @@
 #include <iostream>
 
 
-using Repository::Repo, Domain::inUse, Domain::inMaintenance, Domain::reserved, Domain::outOfService, Domain::parked,
-        std::invalid_argument;
+using Repository::Repo;
 
 
 Repo::Repo() {
@@ -12,16 +11,16 @@ Repo::Repo() {
 
 
 void Repo::generateDummyData() {
-    scooterVector.push_back(Scooter("IDK", "Myria", {1, 1, 2022}, 901, "Centru", inUse));
-    scooterVector.push_back(Scooter("THA", "BMW", {2, 12, 2022}, 451, "Sectia 6", reserved));
-    scooterVector.push_back(Scooter("SWF", "Tesla", {3, 1, 2021}, 51, "Somes", inMaintenance));
-    scooterVector.push_back(Scooter("FXC", "NuStiu", {25, 5, 2022}, 94, "Buna Ziua", outOfService));
-    scooterVector.push_back(Scooter("DWS", "Tesla", {1, 8, 2020}, 134, "Bulgaria", parked));
-    scooterVector.push_back(Scooter("DAZ", "BMW", {16, 6, 2021}, 501, "Tarnava", outOfService));
-    scooterVector.push_back(Scooter("OCA", "Oscar", {11, 7, 2022}, 632, "Sibiu...", parked));
-    scooterVector.push_back(Scooter("DWA", "Tesla", {6, 4, 2023}, 421, "Congo", inUse));
-    scooterVector.push_back(Scooter("KOF", "Paak", {8, 9, 2022}, 123, "E60", inUse));
-    scooterVector.push_back(Scooter("XIQ", "BMW", {25, 11, 2020}, 140, "La cineva acasa", inMaintenance));
+    scooterVector.push_back(Scooter("IDK", "Myria", {1, 1, 2022}, 901, "Centru", Domain::inUse));
+    scooterVector.push_back(Scooter("THA", "BMW", {2, 12, 2022}, 451, "Sectia 6", Domain::reserved));
+    scooterVector.push_back(Scooter("SWF", "Tesla", {3, 1, 2021}, 51, "Somes", Domain::inMaintenance));
+    scooterVector.push_back(Scooter("FXC", "NuStiu", {25, 5, 2022}, 94, "Buna Ziua", Domain::outOfService));
+    scooterVector.push_back(Scooter("DWS", "Tesla", {1, 8, 2020}, 134, "Bulgaria", Domain::parked));
+    scooterVector.push_back(Scooter("DAZ", "BMW", {16, 6, 2021}, 501, "Tarnava", Domain::outOfService));
+    scooterVector.push_back(Scooter("OCA", "Oscar", {11, 7, 2022}, 632, "Sibiu...", Domain::parked));
+    scooterVector.push_back(Scooter("DWA", "Tesla", {6, 4, 2023}, 421, "Congo", Domain::inUse));
+    scooterVector.push_back(Scooter("KOF", "Paak", {8, 9, 2022}, 123, "E60", Domain::inUse));
+    scooterVector.push_back(Scooter("XIQ", "BMW", {25, 11, 2020}, 140, "La cineva acasa", Domain::inMaintenance));
 }
 
 
@@ -49,7 +48,7 @@ Scooter Repo::getById(const string &id) {
 
 
 void Repo::updateEntity(const Scooter &updatedEntity) {
-    for (auto & scooter : scooterVector)
+    for (auto &scooter: scooterVector)
         if (scooter.getId() == updatedEntity.getId()) {
             scooter = updatedEntity;
             return;

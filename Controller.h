@@ -33,10 +33,10 @@ namespace Controller {
         bool remove(const string &id);
 
         // edits the mileage of a scooter
-        void editMileage(const string &id, int newMileage);
+        bool editMileage(const string &id, int newMileage);
 
         // edits the location of a scooter
-        void editLocation(const string &id, const string &newLastLocation);
+        bool editLocation(const string &id, const string &newLastLocation);
 
         // edits the status of a scooter
         void editStatus(const string &id, Status &newStatus);
