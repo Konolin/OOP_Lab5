@@ -151,3 +151,17 @@ vector<Scooter> Ctr::findAvailableScooters() {
 
     return availableScooters;
 }
+
+
+vector<Scooter> Ctr::searchByLocation(const string &location) {
+    vector<Scooter> allScooters = repository->getAll();
+    vector<Scooter> filteredScooters;
+
+    for (const auto &scooter: allScooters)
+        if (scooter.getLastLocation().find(location) != string::npos)
+            filteredScooters.push_back(scooter);
+
+    return filteredScooters;
+}
+
+

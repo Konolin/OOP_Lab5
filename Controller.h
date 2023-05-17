@@ -55,5 +55,8 @@ namespace Controller {
 
         // returns a vector of scooter that have the status parked
         vector<Scooter> findAvailableScooters();
+
+        // returns a vector of scooters with the matching location
+        vector<Scooter> searchByLocation(const string &location);
     };
 }

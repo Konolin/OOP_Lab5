@@ -85,7 +85,7 @@ void UI::ownerMenu() {
                 cin.get();
                 continue;
             case 4:
-//                searchByLocation();
+                searchByLocation();
                 cin.ignore();
                 cout << "Press any key to continue...";
                 cin.get();
@@ -148,7 +148,7 @@ void UI::customerMenu() {
 
         switch (optionInt) {
             case 1:
-//                searchByLocation();
+                searchByLocation();
                 cin.ignore();
                 cout << "Press any key to continue...";
                 cin.get();
@@ -313,21 +313,24 @@ void UI::deleteScooter() {
 //        controller->editStatus(id, newStatus);
 //    }
 //}
-//
-//
-//void UI::searchByLocation() {
-//    string input;
-//    cout << "~~~~ Search by location ~~~~\n\n";
-//    cout << "Enter the location you want to search scooters in: ";
-//    cin >> input;
-//    int index = 1;
-//    for (Scooter &scooter: controller->search(input)) {
-//        cout << index << ". " << scooterToString(scooter) << '\n';
-//    }
-//    cout << '\n';
-//}
-//
-//
+
+
+void UI::searchByLocation() {
+    string location;
+    cout << "~~~~ Search by location ~~~~\n\n";
+    cout << "Enter the location you want to search scooters in: ";
+    cin.ignore();
+    getline(cin, location);
+    cout << '\n';
+
+    vector<Scooter> filteredVector = controller->searchByLocation(location);
+    if (!filteredVector.empty())
+        printScooterVector(filteredVector);
+    else
+        cout << "No scooter with specified location was found.\n";
+}
+
+
 //void UI::filterScooters() {
 //    int input, mileage;
 //    Date commissionDate{};
@@ -365,12 +368,7 @@ void UI::viewScooters() {
     cout << "~~~~ View scooters sorted by commission date ~~~~\n\n";
 
     vector<Scooter> sortedScooters = controller->sortedByCommissionDate();
-
-    for (int index = 0; index < sortedScooters.size(); index++) {
-        cout << index + 1 << ". " << scooterToString(sortedScooters[index]) << "\n";
-    }
-
-    cout << '\n';
+    printScooterVector(sortedScooters);
 }
 
 
@@ -422,8 +420,12 @@ void UI::useScooter() {
 
 
 void UI::printScooterVector(const vector<Scooter> &scooterVector) {
-    for (const auto &scooter: scooterVector)
-        cout << scooterToString(scooter) << '\n';
+    int index = 1;
+    for (const auto &scooter: scooterVector) {
+        cout << index << ". " << scooterToString(scooter) << '\n';
+        index++;
+    }
+    cout << '\n';
 }
 
 
