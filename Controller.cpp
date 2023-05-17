@@ -6,7 +6,7 @@
 using Controller::Ctr, std::invalid_argument, Domain::compareDateAscending, std::exception;
 
 
-Ctr::Ctr(shared_ptr<Repo> repoObj) : repository(std::move(repoObj)) {}
+Ctr::Ctr(shared_ptr<InMemoryRepository> repoObj) : repository(std::move(repoObj)) {}
 
 
 void Ctr::dataCheck(const string &id, const string &model, Date commissionDate, int mileage,
@@ -74,7 +74,7 @@ bool Ctr::editMileage(const string &id, int newMileage) {
     try {
         Scooter scooter = repository->getById(id);
         scooter.setMileage(newMileage);
-        repository->updateEntity(scooter);
+        repository->update(scooter);
         return true;
     } catch (exception &e) {
         return false;
@@ -86,7 +86,7 @@ bool Ctr::editLocation(const string &id, const string &newLastLocation) {
     try {
         Scooter scooter = repository->getById(id);
         scooter.setLastLocation(newLastLocation);
-        repository->updateEntity(scooter);
+        repository->update(scooter);
         return true;
     } catch (exception &e) {
         return false;
@@ -98,7 +98,7 @@ void Ctr::editStatus(const string &id, Status &newStatus) {
     try {
         Scooter scooter = repository->getById(id);
         scooter.setStatus(newStatus);
-        repository->updateEntity(scooter);
+        repository->update(scooter);
     } catch (exception &e) {
         return;
     }
@@ -122,7 +122,7 @@ bool Ctr::reserveScooter(const string &id) {
 
         if (scooter.getStatus() == Domain::parked) {
             scooter.setStatus(Domain::reserved);
-            repository->updateEntity(scooter);
+            repository->update(scooter);
             return true;
         }
         return false;
@@ -138,7 +138,7 @@ bool Ctr::useScooter(const string &id) {
 
         if (scooter.getStatus() == Domain::parked) {
             scooter.setStatus(Domain::inUse);
-            repository->updateEntity(scooter);
+            repository->update(scooter);
             return true;
         }
         return false;

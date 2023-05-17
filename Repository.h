@@ -1,37 +1,28 @@
 #pragma once
 
 
-#include <vector>
 #include "Scooter.h"
+#include <vector>
 
 
-using std::vector, Domain::Scooter, Domain::Status;
+using Domain::Scooter, std::vector;
 
 
 namespace Repository {
-    class Repo {
-    private:
-        vector<Scooter> scooterVector{};
-
-        void generateDummyData();
-
+    class IRepository {
     public:
-        // constructor
-        Repo();
+        virtual void add(const Scooter &newObject) = 0;
 
-        // adds a scooter to the vector
-        void add(const Scooter &new_scooter);
+        // removes an object from the vector, returns false if the object wasn't found
+        virtual void remove(const Scooter &removedObject) = 0;
 
-        // removes a scooter from the vector, returns false if the entity wasn't found
-        void remove(const Scooter &scooter);
+        // returns the vector of objects
+        virtual std::vector<Scooter> getAll() = 0;
 
-        // returns the vector of scooters
-        vector<Scooter> getAll();
-
-        // returns the scooter with the corresponding index
-        Scooter getById(const string &id);
+        // returns the object with the corresponding index
+        virtual Scooter getById(const string &objectId) = 0;
 
         // updates the specified entity, returns false if the entity wasn't found
-        void updateEntity(const Scooter &updatedEntity);
+        virtual void update(const Scooter &updatedObject) = 0;
     };
-};
+}
