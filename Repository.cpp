@@ -32,10 +32,12 @@ void Repo::add(const Scooter &new_scooter) {
 }
 
 
-Scooter Repo::remove(int index) {
-    Scooter removedScooter = scooterVector[index];
-    scooterVector.erase(scooterVector.begin() + index);
-    return removedScooter;
+void Repo::remove(const Scooter &scooter) {
+    size_t initialSize = scooterVector.size();
+    scooterVector.erase(std::remove(scooterVector.begin(), scooterVector.end(), scooter), scooterVector.end());
+
+    if (initialSize == scooterVector.size())
+        throw std::runtime_error("Scooter was not found when trying to remove it.");
 }
 
 
@@ -44,84 +46,19 @@ vector<Scooter> Repo::getAll() {
 }
 
 
-Scooter Repo::getScooter(int index) {
-    if (index > 0 && index < scooterVector.size())
-        return scooterVector[index];
-    else throw invalid_argument("Invalid index.");
+Scooter Repo::getById(const string &id) {
+    for (auto &scooter: getAll())
+        if (scooter.getId() == id)
+            return scooter;
+    throw std::runtime_error("Scooter was not found");
 }
 
 
-void Repo::reserveScooter(int scooterIndex) {
-    scooterVector[scooterIndex].setStatus(reserved);
-}
-
-
-void Repo::useScooter(int scooterIndex) {
-    scooterVector[scooterIndex].setStatus(inUse);
-}
-
-
-void Repo::editMileage(int index, int newMileage) {
-    scooterVector[index].setMileage(newMileage);
-}
-
-
-void Repo::editLocation(int index, const string &newLocation) {
-    scooterVector[index].setLastLocation(newLocation);
-}
-
-
-void Repo::editStatus(int index, const Status &newStatus) {
-    scooterVector[index].setStatus(newStatus);
-}
-
-vector<Scooter> Repo::search(const string& input) {
-    //if the input is an empty vector it returns all the fruits
-    if (input.empty())
-        return scooterVector;
-    vector<Scooter> scooters;
-    //searches for the string we gave in the names of all the vectrors
-    for (Scooter &scooter: scooterVector) {
-        if (scooter.getLastLocation().find(input) != string::npos)
-            scooters.push_back(scooter);
-    }
-    return scooters;
-}
-
-vector<Scooter> Repo::filterScooterDate(Domain::Date data) {
-    //makes a new vector to store all the scooters that have the commission date lower than the given one
-    vector<Scooter> scooters;
-    //iterates through the scootervector
-    for(Scooter& scooter: scooterVector){
-        //if the commission year is lower than the give year than the scooter is saved in the new vector
-        if(scooter.getCommissionDate().year<data.year)
-            scooters.push_back(scooter);
-        else {
-            // if the year it's the same it checks the month
-            if (scooter.getCommissionDate().year == data.year) {
-                if (scooter.getCommissionDate().month < data.month)
-                    scooters.push_back(scooter);
-                else {
-                    //if the month is also the same it checks the day
-                    if (scooter.getCommissionDate().month == data.month) {
-                        if (scooter.getCommissionDate().day < data.day)
-                            scooters.push_back(scooter);
-                    }
-                }
-            }
+void Repo::updateEntity(const Scooter &updatedEntity) {
+    for (auto & scooter : scooterVector)
+        if (scooter.getId() == updatedEntity.getId()) {
+            scooter = updatedEntity;
+            return;
         }
-    }
-    return scooters;
-}
-
-vector<Scooter> Repo::filterScooterMileage(int mileage) {
-    //new vector to store the scooters that fit the criteria
-    vector<Scooter> scooters;
-    //iterates through the vector
-    for(Scooter& scooter: scooterVector){
-        //if the mileage of the scooter is lower than the given value it adds it to the new vector
-        if(scooter.getMileage()<mileage)
-            scooters.push_back(scooter);
-    }
-    return scooters;
+    throw std::runtime_error("No scooter with the same entity was found when trying to update.");
 }

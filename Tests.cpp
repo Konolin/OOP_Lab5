@@ -98,8 +98,8 @@ void Tests::testRepository() {
     assert(repository.getAll().size() == 12);
     assert(repository.getAll().back() == scooter);
 
-    // check the getScooter method
-    assert(repository.getScooter(repository.getAll().size() - 1) == scooter);
+    // check the getById method
+    assert(repository.getById(repository.getAll().size() - 1) == scooter);
 
     // check the remove method
     assert(repository.remove(repository.getAll().size() - 1) == scooter);
@@ -108,27 +108,27 @@ void Tests::testRepository() {
     // check the reserveScooter method
     repository.add(Scooter("IFW", "MyriaMM", {1, 1, 2022}, 931, "Centru", Domain::parked));
     repository.reserveScooter(repository.getAll().size() - 1);
-    scooter = repository.getScooter(repository.getAll().size() - 1);
+    scooter = repository.getById(repository.getAll().size() - 1);
     assert(scooter.getStatus() == Domain::reserved);
 
     // check the useScooter method
     repository.useScooter(repository.getAll().size() - 1);
-    scooter = repository.getScooter(repository.getAll().size() - 1);
+    scooter = repository.getById(repository.getAll().size() - 1);
     assert(scooter.getStatus() == Domain::inUse);
 
     // check editMileage method
     repository.editMileage(repository.getAll().size() - 1, 420);
-    scooter = repository.getScooter(repository.getAll().size() - 1);
+    scooter = repository.getById(repository.getAll().size() - 1);
     assert(scooter.getMileage() == 420);
 
     // check editLocation method
     repository.editLocation(repository.getAll().size() - 1, "Str. Horea nr. 106");
-    scooter = repository.getScooter(repository.getAll().size() - 1);
+    scooter = repository.getById(repository.getAll().size() - 1);
     assert(scooter.getLastLocation() == "Str. Horea nr. 106");
 
     // check the editStatus method
     repository.editStatus(repository.getAll().size() - 1, Domain::inMaintenance);
-    scooter = repository.getScooter(repository.getAll().size() - 1);
+    scooter = repository.getById(repository.getAll().size() - 1);
     assert(scooter.getStatus() == Domain::inMaintenance);
 
     // TODO - CATA SA VERIFICI :) PUP DULCE

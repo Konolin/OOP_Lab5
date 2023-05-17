@@ -261,7 +261,7 @@ void UI::editScooter() {
     cout << "Type the id of the scooter:";
     cin.ignore();
     getline(cin, id);
-    Scooter scooter = controller->repository->getScooter(controller->find(id));
+    Scooter scooter = controller->repository->getById(controller->find(id));
 
     cout << "Here is the selected scooter:\n\n";
     cout << "Scooter ID: " << id << '\n';

@@ -9,7 +9,6 @@ using Controller::Ctr, std::invalid_argument, Domain::parked, Domain::reserved;
 Ctr::Ctr(shared_ptr<Repo> repoObj) : repository(std::move(repoObj)) {}
 
 
-// TODO - adauga asta undeva
 void Ctr::dataCheck(const string &id, const string &model, Date commissionDate, int mileage,
                     const string &lastLocation, Status status) {
     // check if the id has exactly 3 letters
@@ -120,7 +119,7 @@ bool Ctr::dateAscending(const Scooter &scooter1, const Scooter &scooter2) {
 bool Ctr::reserveScooter(const string &id) {
     try {
         int scooterIndex = find(id);
-        Scooter scooter = repository->getScooter(scooterIndex);
+        Scooter scooter = repository->getById(scooterIndex);
 
         if (scooter.getStatus() == parked) {
             repository->reserveScooter(scooterIndex);
@@ -135,7 +134,7 @@ bool Ctr::reserveScooter(const string &id) {
 bool Ctr::useScooter(const string &id) {
     try {
         int scooterIndex = find(id);
-        Scooter scooter = repository->getScooter(scooterIndex);
+        Scooter scooter = repository->getById(scooterIndex);
 
         if (scooter.getStatus() == parked) {
             repository->useScooter(scooterIndex);
