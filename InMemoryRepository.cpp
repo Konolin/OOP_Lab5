@@ -1,16 +1,16 @@
-#include "Repository.h"
+#include "InMemoryRepository.h"
 #include <iostream>
 
 
-using Repository::Repo;
+using Repository::InMemoryRepository;
 
 
-Repo::Repo() {
+InMemoryRepository::InMemoryRepository() {
     generateDummyData();
 }
 
 
-void Repo::generateDummyData() {
+void InMemoryRepository::generateDummyData() {
     scooterVector.push_back(Scooter("IDK", "Myria", {1, 1, 2022}, 901, "Centru", Domain::inUse));
     scooterVector.push_back(Scooter("THA", "BMW", {2, 12, 2022}, 451, "Sectia 6", Domain::reserved));
     scooterVector.push_back(Scooter("SWF", "Tesla", {3, 1, 2021}, 51, "Somes", Domain::inMaintenance));
@@ -24,22 +24,22 @@ void Repo::generateDummyData() {
 }
 
 
-void Repo::add(const Scooter &new_scooter) {
+void InMemoryRepository::add(const Scooter &new_scooter) {
     scooterVector.push_back(new_scooter);
 }
 
 
-void Repo::remove(const Scooter &scooter) {
+void InMemoryRepository::remove(const Scooter &scooter) {
     scooterVector.erase(std::remove(scooterVector.begin(), scooterVector.end(), scooter), scooterVector.end());
 }
 
 
-vector<Scooter> Repo::getAll() {
+vector<Scooter> InMemoryRepository::getAll() {
     return scooterVector;
 }
 
 
-Scooter Repo::getById(const string &id) {
+Scooter InMemoryRepository::getById(const string &id) {
     for (auto &scooter: getAll())
         if (scooter.getId() == id)
             return scooter;
@@ -47,7 +47,7 @@ Scooter Repo::getById(const string &id) {
 }
 
 
-void Repo::updateEntity(const Scooter &updatedEntity) {
+void InMemoryRepository::update(const Scooter &updatedEntity) {
     for (auto &scooter: scooterVector)
         if (scooter.getId() == updatedEntity.getId()) {
             scooter = updatedEntity;

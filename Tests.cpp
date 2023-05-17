@@ -4,7 +4,7 @@
 //#include <iostream>
 //#include <cassert>
 //
-//using Test::Tests, std::cout, Domain::Scooter, std::exception, Repository::Repo;
+//using Test::Tests, std::cout, Domain::Scooter, std::exception, Repository::InMemoryRepository;
 //
 //void Tests::Tests::testAll() {
 //    cout << "Starting all tests...\n\n";
@@ -89,7 +89,7 @@
 //    cout << "Starting repository test...\n";
 //
 //    // check the original size of the vector from the array
-//    Repo repository;
+//    InMemoryRepository repository;
 //    assert(repository.getAll().size() == 11);
 //
 //    // check the add method
