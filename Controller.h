@@ -19,26 +19,18 @@ namespace Controller {
         static void dataCheck(const string &id, const string &model, Date commissionDate, int mileage,
                               const string &lastLocation, Status status);
 
-        static bool dateAscending(const Scooter &scooter1, const Scooter &scooter2);
-
     public:
         shared_ptr<Repo> repository;
 
         // constructor
         Ctr(shared_ptr<Repo> repoObj);
 
-        // checks if a string contains 3 letters
-        static bool hasThreeLetters(const string &id);
-
         // creates a new object and adds it to the repository
-        void add(const string &id, const string &model, const Date &commissionDate, int mileage,
+        bool add(const string &id, const string &model, const Date &commissionDate, int mileage,
                  const string &lastLocation, const Status &status);
 
         // removes a scooter
         bool remove(const string &id);
-
-        // finds a scooters index in the vector
-        int find(const string &id);
 
         // edits the mileage of a scooter
         void editMileage(const string &id, int newMileage);
@@ -58,13 +50,10 @@ namespace Controller {
         // changes the status of a scooter to inUse
         bool useScooter(const string &id);
 
-        // returns a vector of scooters that contain the specified string in their location
-        vector<Scooter> search(const string &input);
+        // checks if a string contains 3 letters
+        static bool hasThreeLetters(const string &id);
 
-        // returns a vector of scooters with the commissionDate older than specified date
-        vector<Scooter> filterScooterDate(Date data);
-
-        // returns a vector of scooters that have a lower mileage than the one specified
-        vector<Scooter> filterScooterMileage(int mileage);
+        // returns a vector of scooter that have the status parked
+        vector<Scooter> findAvailableScooters();
     };
 }

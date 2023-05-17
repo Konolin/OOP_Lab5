@@ -81,6 +81,7 @@ void Scooter::setStatus(const Status &newStatus) {
     status = newStatus;
 }
 
+
 bool Scooter::operator==(const Scooter &other) {
     if (id != other.id) return false;
     if (model != other.model) return false;
@@ -94,7 +95,18 @@ bool Scooter::operator==(const Scooter &other) {
     return true;
 }
 
+
 bool Scooter::operator!=(const Scooter &other) {
     return !operator==(other);
 }
 
+
+bool Domain::compareDateAscending(const Date &date1, const Date &date2) {
+    if (date1.year != date2.year)
+        return date1.year < date2.year;
+
+    if (date1.month != date2.month)
+        return date1.month < date2.month;
+
+    return date1.day < date2.day;
+}

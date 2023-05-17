@@ -17,6 +17,9 @@ namespace Domain {
     };
 
 
+    bool compareDateAscending(const Date &date1, const Date &date2);
+
+
     class Scooter {
     private:
         string id, model, lastLocation;

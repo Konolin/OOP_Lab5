@@ -22,7 +22,7 @@ namespace Repository {
         // adds a scooter to the vector
         void add(const Scooter &new_scooter);
 
-        // removes a scooter from the vector, returns the removed scooter
+        // removes a scooter from the vector, returns false if the entity wasn't found
         void remove(const Scooter &scooter);
 
         // returns the vector of scooters
@@ -31,7 +31,7 @@ namespace Repository {
         // returns the scooter with the corresponding index
         Scooter getById(const string &id);
 
-        // updates the specified entity
+        // updates the specified entity, returns false if the entity wasn't found
         void updateEntity(const Scooter &updatedEntity);
     };
 };

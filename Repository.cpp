@@ -22,8 +22,6 @@ void Repo::generateDummyData() {
     scooterVector.push_back(Scooter("DWA", "Tesla", {6, 4, 2023}, 421, "Congo", inUse));
     scooterVector.push_back(Scooter("KOF", "Paak", {8, 9, 2022}, 123, "E60", inUse));
     scooterVector.push_back(Scooter("XIQ", "BMW", {25, 11, 2020}, 140, "La cineva acasa", inMaintenance));
-    scooterVector.push_back(Scooter("IWN", "Tesla", {11, 12, 2021}, 941, "uhaaaaa", reserved));
-
 }
 
 
@@ -33,11 +31,7 @@ void Repo::add(const Scooter &new_scooter) {
 
 
 void Repo::remove(const Scooter &scooter) {
-    size_t initialSize = scooterVector.size();
     scooterVector.erase(std::remove(scooterVector.begin(), scooterVector.end(), scooter), scooterVector.end());
-
-    if (initialSize == scooterVector.size())
-        throw std::runtime_error("Scooter was not found when trying to remove it.");
 }
 
 
@@ -60,5 +54,4 @@ void Repo::updateEntity(const Scooter &updatedEntity) {
             scooter = updatedEntity;
             return;
         }
-    throw std::runtime_error("No scooter with the same entity was found when trying to update.");
 }
