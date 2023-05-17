@@ -164,4 +164,32 @@ vector<Scooter> Ctr::searchByLocation(const string &location) {
     return filteredScooters;
 }
 
+vector<Scooter> Ctr::filterScooterDate(const Date &date) {
+    vector<Scooter> allScooters = repository->getAll();
+    vector<Scooter> filteredScooters;
+
+    for (const auto &scooter: allScooters) {
+        Date scooterDate = scooter.getCommissionDate();
+        if (scooterDate.year == date.year && scooterDate.month == date.month && scooterDate.day < date.day)
+            filteredScooters.push_back(scooter);
+        else if (scooterDate.year == date.year && scooterDate.month < date.month)
+            filteredScooters.push_back(scooter);
+        else if (scooterDate.year < date.year)
+            filteredScooters.push_back(scooter);
+    }
+
+    return filteredScooters;
+}
+
+vector<Scooter> Ctr::filterScooterMileage(int mileage) {
+    vector<Scooter> allScooters = repository->getAll();
+    vector<Scooter> filteredScooters;
+
+    for (const auto &scooter: allScooters)
+        if (scooter.getMileage() < mileage)
+            filteredScooters.push_back(scooter);
+
+    return filteredScooters;
+}
+
 

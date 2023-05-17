@@ -58,5 +58,11 @@ namespace Controller {
 
         // returns a vector of scooters with the matching location
         vector<Scooter> searchByLocation(const string &location);
+
+        // returns a vector of scooters with the date earlier than the parameter
+        vector<Scooter> filterScooterDate(const Date &date);
+
+        // returns a vector of scooters with the mileage lower than the parameter
+        vector<Scooter> filterScooterMileage(int mileage);
     };
 }

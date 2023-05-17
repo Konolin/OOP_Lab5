@@ -79,7 +79,7 @@ void UI::ownerMenu() {
                 cin.get();
                 continue;
             case 3:
-//                editScooter();
+                editScooter();
                 cin.ignore();
                 cout << "Press any key to continue...";
                 cin.get();
@@ -91,7 +91,7 @@ void UI::ownerMenu() {
                 cin.get();
                 continue;
             case 5:
-//                filterScooters();
+                filterScooters();
                 cin.ignore();
                 cout << "Press any key to continue...";
                 cin.get();
@@ -154,7 +154,7 @@ void UI::customerMenu() {
                 cin.get();
                 continue;
             case 2:
-//                filterScooters();
+                filterScooters();
                 cin.ignore();
                 cout << "Press any key to continue...";
                 cin.get();
@@ -256,63 +256,66 @@ void UI::deleteScooter() {
 }
 
 
-//// TODO - la location si mileage nu se salveaza primul caracter (ex ptr 123 -> 23)
-//void UI::editScooter() {
-//    cout << "~~~~~  Editing a scooter  ~~~~~\n\n";
-//
-//    string id, newLastLocation, user_input, choice;
-//    int newMileage;
-//    Status newStatus;
-//
-//    cout << "Type the id of the scooter:";
-//    cin.ignore();
-//    getline(cin, id);
-//    Scooter scooter = controller->repository->getById(controller->find(id));
-//
-//    cout << "Here is the selected scooter:\n\n";
-//    cout << "Scooter ID: " << id << '\n';
-//    cout << "Model: " << scooter.getModel() << '\n';
-//    cout << "Commission Date: " << scooter.getCommissionDate().year << "/" <<
-//         scooter.getCommissionDate().month << "/" << scooter.getCommissionDate().day << '\n';
-//    cout << "Mileage: " << scooter.getMileage() << '\n';
-//    cout << "Last Location: " << scooter.getLastLocation() << '\n';
-//    cout << "Status: " << statusToString(scooter.getStatus()) << "\n\n";
-//
-//    cout << "What would you like to edit to this scooter? (Mileage / Last Location / Status):";
-//    getline(cin, choice);
-//
-//    if (choice == "Mileage") {
-//        cout << "Type the new mileage of the scooter:";
-//        cin.ignore();
-//        getline(cin, user_input);   //ar trebui aici un data validation, actually la toate
-//        newMileage = stoi(user_input);
-//        controller->editMileage(id, newMileage);
-//    }
-//    if (choice == "Last Location") {
-//        cout << "Type the new last location of the scooter:";
-//        cin.ignore();
-//        getline(cin, newLastLocation);
-//        controller->editLocation(id, newLastLocation);
-//    }
-//    if (choice == "Status") {
-//        cin.ignore();
-//        cout << "Type the new status of the new scooter (parked, reserved, in use, in maintenance, out of service):";
-//        getline(cin, user_input);
-//
-//        if (user_input == "parked") {
-//            newStatus = parked;
-//        } else if (user_input == "reserved") {
-//            newStatus = reserved;
-//        } else if (user_input == "in use") {
-//            newStatus = inUse;
-//        } else if (user_input == "in maintenance") {
-//            newStatus = inMaintenance;
-//        } else if (user_input == "out of service") {
-//            newStatus = outOfService;
-//        }
-//        controller->editStatus(id, newStatus);
-//    }
-//}
+// TODO - la location si mileage nu se salveaza primul caracter (ex ptr 123 -> 23)
+void UI::editScooter() {
+    cout << "~~~~~  Editing a scooter  ~~~~~\n\n";
+
+    string id, newLastLocation, user_input, choice;
+    int newMileage;
+    Status newStatus;
+
+    cout << "Type the id of the scooter:";
+    cin.ignore();
+    getline(cin, id);
+    Scooter scooter = controller->repository->getById(id);
+
+    cout << "Here is the selected scooter:\n\n";
+    cout << "Scooter ID: " << id << '\n';
+    cout << "Model: " << scooter.getModel() << '\n';
+    cout << "Commission Date: " << scooter.getCommissionDate().year << "/" <<
+         scooter.getCommissionDate().month << "/" << scooter.getCommissionDate().day << '\n';
+    cout << "Mileage: " << scooter.getMileage() << '\n';
+    cout << "Last Location: " << scooter.getLastLocation() << '\n';
+    cout << "Status: " << statusToString(scooter.getStatus()) << "\n\n";
+
+    cout << "What would you like to edit to this scooter? (Mileage / Last Location / Status):";
+    getline(cin, choice);
+
+    if (choice == "Mileage") {
+        cout << "Type the new mileage of the scooter:";
+        cin.ignore();
+        getline(cin, user_input);
+        newMileage = stoi(user_input);
+        controller->editMileage(id, newMileage);
+        return;
+    }
+    if (choice == "Last Location") {
+        cout << "Type the new last location of the scooter:";
+        cin.ignore();
+        getline(cin, newLastLocation);
+        controller->editLocation(id, newLastLocation);
+        return;
+    }
+    if (choice == "Status") {
+        cin.ignore();
+        cout << "Type the new status of the new scooter (parked, reserved, in use, in maintenance, out of service):";
+        getline(cin, user_input);
+
+        if (user_input == "parked") {
+            newStatus = parked;
+        } else if (user_input == "reserved") {
+            newStatus = reserved;
+        } else if (user_input == "in use") {
+            newStatus = inUse;
+        } else if (user_input == "in maintenance") {
+            newStatus = inMaintenance;
+        } else if (user_input == "out of service") {
+            newStatus = outOfService;
+        }
+        controller->editStatus(id, newStatus);
+        return;
+    }
+}
 
 
 void UI::searchByLocation() {
@@ -331,36 +334,40 @@ void UI::searchByLocation() {
 }
 
 
-//void UI::filterScooters() {
-//    int input, mileage;
-//    Date commissionDate{};
-//    vector<Scooter> filteredVector;
-//
-//    cout << "~~~~ Filter scooters ~~~~\n";
-//    cout << "Would you like to filter scooters by: \n\n1. Commission date\n2. Mileage\n";
-//    cin >> input;
-//
-//    if (input == 1) {
-//        cout << "Filter all the scooters with the commission date before: \nDay: ";
-//        cin >> commissionDate.day;
-//        cout << "Month: ";
-//        cin >> commissionDate.month;
-//        cout << "Year: ";
-//        cin >> commissionDate.year;
-//        filteredVector = controller->filterScooterDate(commissionDate);
-//    } else {
-//        cout << "Filter all the scooters with the mileage under: ";
-//        cin >> mileage;
-//        filteredVector = controller->filterScooterMileage(mileage);
-//    }
-//
-//    int index = 1;
-//    for (Scooter &scooter: filteredVector) {
-//        cout << index << ". " << scooterToString(scooter) << '\n';
-//        index++;
-//    }
-//    cout << '\n';
-//}
+void UI::filterScooters() {
+    int input, mileage;
+    vector<Scooter> filteredVector;
+    Date commissionDate{};
+
+    cin.ignore();
+    cout << "~~~~ Filter scooters ~~~~\n";
+    cout << "Would you like to filter scooters by: \n\n1. Commission date\n2. Mileage\n\n";
+    cout << "Choose an option: ";
+    cin >> input;
+
+    switch (input) {
+        case 1:
+            cout << "\nFilter all the scooters with the commission date before: \n\tDay: ";
+            cin >> commissionDate.day;
+            cout << "\tMonth: ";
+            cin >> commissionDate.month;
+            cout << "\tYear: ";
+            cin >> commissionDate.year;
+            filteredVector = controller->filterScooterDate(commissionDate);
+            break;
+        case 2:
+            cout << "\nFilter all the scooters with the mileage under: ";
+            cin >> mileage;
+            filteredVector = controller->filterScooterMileage(mileage);
+            break;
+        default:
+            cout << "Invalid input, try again...";
+            cin.get();
+            filterScooters();
+    }
+
+    printScooterVector(filteredVector);
+}
 
 
 void UI::viewScooters() {
@@ -420,6 +427,7 @@ void UI::useScooter() {
 
 
 void UI::printScooterVector(const vector<Scooter> &scooterVector) {
+    cout << '\n';
     int index = 1;
     for (const auto &scooter: scooterVector) {
         cout << index << ". " << scooterToString(scooter) << '\n';
