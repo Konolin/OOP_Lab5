@@ -17,7 +17,7 @@ namespace Controller {
     private:
         // check if the data given as parameter is valid
         static void dataCheck(const string &id, const string &model, Date commissionDate, int mileage,
-                              const string &lastLocation, Status status);
+                              const string &lastLocation);
 
     public:
         shared_ptr<Repo> repository;

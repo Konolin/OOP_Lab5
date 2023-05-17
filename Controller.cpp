@@ -10,7 +10,7 @@ Ctr::Ctr(shared_ptr<Repo> repoObj) : repository(std::move(repoObj)) {}
 
 
 void Ctr::dataCheck(const string &id, const string &model, Date commissionDate, int mileage,
-                    const string &lastLocation, Status status) {
+                    const string &lastLocation) {
     // check if the id has exactly 3 letters
     if (id.length() != 3 || !hasThreeLetters(id))
         throw invalid_argument("The id is not valid.");
@@ -46,7 +46,7 @@ void Ctr::dataCheck(const string &id, const string &model, Date commissionDate, 
 bool Ctr::add(const string &id, const string &model, const Date &commissionDate, int mileage,
               const string &lastLocation, const Status &status) {
     try {
-        dataCheck(id, model, commissionDate, mileage, lastLocation, status);
+        dataCheck(id, model, commissionDate, mileage, lastLocation);
     } catch (std::exception &e) {
         return false;
     }
@@ -145,7 +145,7 @@ bool Ctr::hasThreeLetters(const string &id) {
 vector<Scooter> Ctr::findAvailableScooters() {
     vector<Scooter> availableScooters;
 
-    for (const auto& scooter: repository->getAll())
+    for (const auto &scooter: repository->getAll())
         if (scooter.getStatus() == Domain::parked)
             availableScooters.push_back(scooter);
 
@@ -170,11 +170,9 @@ vector<Scooter> Ctr::filterScooterDate(const Date &date) {
 
     for (const auto &scooter: allScooters) {
         Date scooterDate = scooter.getCommissionDate();
-        if (scooterDate.year == date.year && scooterDate.month == date.month && scooterDate.day < date.day)
-            filteredScooters.push_back(scooter);
-        else if (scooterDate.year == date.year && scooterDate.month < date.month)
-            filteredScooters.push_back(scooter);
-        else if (scooterDate.year < date.year)
+
+        if (scooterDate.year == date.year && scooterDate.month == date.month && scooterDate.day < date.day ||
+            scooterDate.year == date.year && scooterDate.month < date.month || scooterDate.year < date.year)
             filteredScooters.push_back(scooter);
     }
 
