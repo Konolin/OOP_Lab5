@@ -63,6 +63,9 @@ namespace UserInterface {
         // converts the status to string
         static string statusToString(const Status &status);
 
+        // prints the vector of scooters
+        static void printScooterVector(const vector<Scooter> &scooterVector);
+
     public:
         // constructor
         UI(shared_ptr<Ctr> ctrObj);

@@ -49,17 +49,17 @@ void Scooter::setModel(const string &newModel) {
 
 void Scooter::setCommissionDate(const Date &newCommissionDate) {
     if (newCommissionDate.day < 1 || newCommissionDate.day > 31)
-        throw std::invalid_argument("Commission date day is not valid.");
+        throw invalid_argument("Commission date day is not valid.");
     if (newCommissionDate.day == 31 && newCommissionDate.month % 2 == 0)
-        throw std::invalid_argument("Commission date day is not valid.");
+        throw invalid_argument("Commission date day is not valid.");
     if (newCommissionDate.day > 28 && newCommissionDate.month == 2 && newCommissionDate.year % 4 != 0)
-        throw std::invalid_argument("Commission date day is not valid.");
+        throw invalid_argument("Commission date day is not valid.");
     if (newCommissionDate.day > 29 && newCommissionDate.month == 2 && newCommissionDate.year % 4 == 0)
-        throw std::invalid_argument("Commission date day is not valid.");
+        throw invalid_argument("Commission date day is not valid.");
     if (newCommissionDate.month < 1 || newCommissionDate.month > 12)
-        throw std::invalid_argument("Commission date month is not valid.");
+        throw invalid_argument("Commission date month is not valid.");
     if (newCommissionDate.year > 2023)
-        throw std::invalid_argument("Expiration date year is not valid.");
+        throw invalid_argument("Expiration date year is not valid.");
 
     commissionDate = newCommissionDate;
 }
@@ -81,6 +81,7 @@ void Scooter::setStatus(const Status &newStatus) {
     status = newStatus;
 }
 
+
 bool Scooter::operator==(const Scooter &other) {
     if (id != other.id) return false;
     if (model != other.model) return false;
@@ -94,7 +95,18 @@ bool Scooter::operator==(const Scooter &other) {
     return true;
 }
 
+
 bool Scooter::operator!=(const Scooter &other) {
     return !operator==(other);
 }
 
+
+bool Domain::compareDateAscending(const Date &date1, const Date &date2) {
+    if (date1.year != date2.year)
+        return date1.year < date2.year;
+
+    if (date1.month != date2.month)
+        return date1.month < date2.month;
+
+    return date1.day < date2.day;
+}

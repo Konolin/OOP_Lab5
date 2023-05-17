@@ -22,37 +22,16 @@ namespace Repository {
         // adds a scooter to the vector
         void add(const Scooter &new_scooter);
 
-        // removes a scooter from the vector, returns the removed scooter
-        Scooter remove(int index);
+        // removes a scooter from the vector, returns false if the entity wasn't found
+        void remove(const Scooter &scooter);
 
         // returns the vector of scooters
         vector<Scooter> getAll();
 
         // returns the scooter with the corresponding index
-        Scooter getScooter(int index);
+        Scooter getById(const string &id);
 
-        // changes the current status of a scooter to reserved
-        void reserveScooter(int scooterIndex);
-
-        // changes the current status of a scooter to inUse
-        void useScooter(int scooterIndex);
-
-        // changes the mileage of a scooter
-        void editMileage(int index, int newMileage);
-
-        // changes the currentLocation of a scooter
-        void editLocation(int index, const string &newLocation);
-
-        // changes the status of a scooter
-        void editStatus(int index, const Status &newStatus);
-
-        //searches for the scooters by location
-        vector<Scooter> search(const string& input);
-
-        //filters the scooters by comission date
-        vector<Scooter> filterScooterDate(Domain::Date data);
-
-        //filters the scooters by mileage
-        vector<Scooter> filterScooterMileage(int mileage);
+        // updates the specified entity, returns false if the entity wasn't found
+        void updateEntity(const Scooter &updatedEntity);
     };
 };
