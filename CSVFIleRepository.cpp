@@ -7,8 +7,8 @@
 using Repository::CSVRepository, std::to_string;
 
 
-CSVRepository::CSVRepository(const string &_fileName) {
-    fileName = _fileName;
+CSVRepository::CSVRepository() {
+    fileName = "Scooters.csv";
 }
 
 void CSVRepository::add(const Scooter &newObject) {
@@ -24,7 +24,7 @@ void CSVRepository::add(const Scooter &newObject) {
              << newObject.getCommissionDate().year << ","
              << newObject.getMileage() << ","
              << newObject.getLastLocation() << ","
-             << static_cast<int>(newObject.getStatus()) << "\n";
+             << statusToString(newObject.getStatus()) << "\n";
 
         file.close();
     } else {

@@ -10,10 +10,14 @@ using UserInterface::UI, std::cout, std::cin, std::to_string, Domain::User, Doma
 
 UI::UI(shared_ptr<Ctr> ctrObj) : controller(std::move(ctrObj)) {}
 
+
 void UI::startUI() {
     cout << string(30, '\n');
 
     string userInput;
+
+    cout << "Select a repository type (csv / memory): ";
+    cin >> userInput;
 
     cout << "Select a role (owner / customer): ";
     cin >> userInput;

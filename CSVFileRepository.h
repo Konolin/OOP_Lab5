@@ -9,13 +9,14 @@ using Repository::IRepository, std::string;
 
 
 namespace Repository {
-    class CSVRepository : public IRepository{
+    class CSVRepository : public IRepository {
     private:
         string fileName{};
 
     public:
-        explicit CSVRepository(const string &_fileName);
+        CSVRepository();
 
+        // adds a scooter in the repo
         void add(const Scooter &newObject) override;
 
         // removes an object from the vector, returns false if the object wasn't found

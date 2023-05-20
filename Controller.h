@@ -3,10 +3,11 @@
 
 #include <memory>
 #include "InMemoryRepository.h"
+#include "Repository.h"
 #include "Scooter.h"
 
 
-using std::shared_ptr, Repository::InMemoryRepository, Domain::Date, Domain::Status;
+using std::shared_ptr, Repository::InMemoryRepository, Domain::Date, Domain::Status, Repository::IRepository;
 
 
 namespace Controller {
@@ -21,10 +22,10 @@ namespace Controller {
                               const string &lastLocation);
 
     public:
-        shared_ptr<InMemoryRepository> repository;
+        shared_ptr<IRepository> repository;
 
         // constructor
-        Ctr(shared_ptr<InMemoryRepository> repoObj);
+        Ctr(shared_ptr<IRepository> repoObj);
 
         // creates a new object and adds it to the repository
         bool add(const string &id, const string &model, const Date &commissionDate, int mileage,
