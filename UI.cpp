@@ -5,7 +5,7 @@
 
 
 using UserInterface::UI, std::cout, std::cin, std::to_string, Domain::User, Domain::inUse, Domain::inMaintenance,
-        Domain::parked, Domain::reserved, Domain::outOfService, std::exception;
+        Domain::parked, Domain::reserved, Domain::outOfService, std::exception, Domain::User;
 
 
 UI::UI(shared_ptr<Ctr> ctrObj) : controller(std::move(ctrObj)) {}
@@ -20,7 +20,7 @@ void UI::startUI() {
     cout << "Select a role (owner / customer): ";
     cin >> userInput;
 
-    User user(userInput);
+    user = User(userInput);
 
     if (user.getType() == "owner")
         ownerMenu();

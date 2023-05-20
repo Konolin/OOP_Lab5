@@ -13,3 +13,5 @@ void User::addReservedScooter(const Scooter &reservedScooter) {
 }
 
 string User::getType() const { return userType; }
+
+User::User() { userType = "NONE"; }

@@ -3,6 +3,7 @@
 
 #include "memory"
 #include "Controller.h"
+#include "User.h"
 
 
 using std::shared_ptr, Controller::Ctr;
@@ -12,6 +13,7 @@ namespace UserInterface {
     class UI {
     private:
         shared_ptr<Ctr> controller;
+        Domain::User user{};
 
         // prints the owner menu options
         static void ownerMenuUI();

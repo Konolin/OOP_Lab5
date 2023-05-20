@@ -7,7 +7,7 @@
 #include <vector>
 
 
-using std::string, Domain::Scooter, std::vector;
+using std::string, Domain::Scooter, std::vector, Domain::User;
 
 
 namespace Domain {
@@ -18,6 +18,8 @@ namespace Domain {
 
     public:
         User(const string &userType);
+
+        User();
 
         [[nodiscard]] string getType() const;
 
