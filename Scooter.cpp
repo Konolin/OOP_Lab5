@@ -2,7 +2,7 @@
 #include "Controller.h"
 
 
-using Domain::Scooter, Domain::Date, Domain::Status, Controller::Ctr, std::invalid_argument;
+using Domain::Scooter, Domain::Date, Domain::Status, Controller::Ctr, std::invalid_argument, std::to_string;
 
 
 Scooter::Scooter(const string &_id, const string &_model, Date _commissionDate, int _mileage,
@@ -101,6 +101,18 @@ bool Scooter::operator!=(const Scooter &other) {
 }
 
 
+string Scooter::scooterToString() const {
+    string strCommissionDate = Domain::dateToString(commissionDate);
+    string strMileage = to_string(mileage);
+    string strStatus = statusToString(status);
+
+    string scooterString =
+            id + ", " + model + ", " + strCommissionDate + ", " + strMileage + ", " + lastLocation + ", " + strStatus;
+
+    return scooterString;
+}
+
+
 bool Domain::compareDateAscending(const Date &date1, const Date &date2) {
     if (date1.year != date2.year)
         return date1.year < date2.year;
@@ -109,4 +121,27 @@ bool Domain::compareDateAscending(const Date &date1, const Date &date2) {
         return date1.month < date2.month;
 
     return date1.day < date2.day;
+}
+
+
+string Domain::statusToString(const Domain::Status &status) {
+    switch (status) {
+        case parked:
+            return "parked";
+        case reserved:
+            return "reserved";
+        case inUse:
+            return "in use";
+        case inMaintenance:
+            return "in maintenance";
+        case outOfService:
+            return "out of service";
+        default:
+            return "unknown";
+    }
+}
+
+
+string Domain::dateToString(const Date &date) {
+    return '{' + to_string(date.day) + '/' + to_string(date.month) + '/' + to_string(date.year) + '}';
 }

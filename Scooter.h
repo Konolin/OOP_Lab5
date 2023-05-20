@@ -1,6 +1,7 @@
 #pragma once
 
 
+#include "Domain.h"
 #include <string>
 
 
@@ -12,12 +13,15 @@ namespace Domain {
         parked, reserved, inUse, inMaintenance, outOfService
     };
 
+    string statusToString(const Status &status);
+
     struct Date {
         int day, month, year;
     };
 
     bool compareDateAscending(const Date &date1, const Date &date2);
 
+    string dateToString(const Date &date);
 
     class Scooter {
     private:
@@ -60,5 +64,7 @@ namespace Domain {
 
         // overload for the != operator
         bool operator!=(const Scooter &other);
+
+        string scooterToString() const;
     };
 }
