@@ -1,10 +1,11 @@
 #include "UI.h"
+#include "User.h"
 #include <utility>
 #include <iostream>
 
 
-using UserInterface::UI, std::cout, std::cin, UserInterface::owner, UserInterface::customer, std::to_string,
-        Domain::inUse, Domain::inMaintenance, Domain::parked, Domain::reserved, Domain::outOfService, std::exception;
+using UserInterface::UI, std::cout, std::cin, std::to_string, Domain::User, Domain::inUse, Domain::inMaintenance,
+        Domain::parked, Domain::reserved, Domain::outOfService, std::exception;
 
 
 UI::UI(shared_ptr<Ctr> ctrObj) : controller(std::move(ctrObj)) {}
@@ -19,13 +20,13 @@ void UI::startUI() {
     cout << "Select a role (owner / customer): ";
     cin >> userInput;
 
-    if (userInput == "owner") {
-        userRole = owner;
+    User user(userInput);
+
+    if (user.getType() == "owner")
         ownerMenu();
-    } else if (userInput == "customer") {
-        userRole = customer;
+    else if (user.getType() == "customer")
         customerMenu();
-    } else {
+    else {
         cin.ignore();
         cout << "Invalid input, try again.\n";
         cout << "Press any key to continue...";
@@ -432,48 +433,9 @@ void UI::printScooterVector(const vector<Scooter> &scooterVector) {
     cout << '\n';
     int index = 1;
     for (const auto &scooter: scooterVector) {
-        cout << index << ". " << scooterToString(scooter) << '\n';
+        cout << index << ". " << scooter.scooterToString() << '\n';
         index++;
     }
     cout << '\n';
 }
 
-
-// TODO - move in Domain
-string UI::scooterToString(const Scooter &scooter) {
-    string id = scooter.getId();
-    string model = scooter.getModel();
-    string commissionDate = dateToString(scooter.getCommissionDate());
-    string mileage = to_string(scooter.getMileage());
-    string lastLocation = scooter.getLastLocation();
-    string status = statusToString(scooter.getStatus());
-
-    string scooterString =
-            id + ", " + model + ", " + commissionDate + ", " + mileage + ", " + lastLocation + ", " + status;
-
-    return scooterString;
-}
-
-// TODO - move in Domain
-string UI::dateToString(const Date &date) {
-    return '{' + to_string(date.day) + '/' + to_string(date.month) + '/' + to_string(date.year) + '}';
-}
-
-
-// TODO - move in Domain
-string UI::statusToString(const Status &status) {
-    switch (status) {
-        case parked:
-            return "parked";
-        case reserved:
-            return "reserved";
-        case inUse:
-            return "in use";
-        case inMaintenance:
-            return "in maintenance";
-        case outOfService:
-            return "out of service";
-        default:
-            return "unknown";
-    }
-}

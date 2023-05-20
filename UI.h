@@ -9,14 +9,9 @@ using std::shared_ptr, Controller::Ctr;
 
 
 namespace UserInterface {
-    enum UserRole {
-        customer, owner
-    };
-
     class UI {
     private:
         shared_ptr<Ctr> controller;
-        UserRole userRole{};
 
         // prints the owner menu options
         static void ownerMenuUI();
@@ -53,15 +48,6 @@ namespace UserInterface {
 
         // gets the information of a scooter that the user wants to use
         void useScooter();
-
-        // converts a scooterObject to string
-        static string scooterToString(const Scooter &scooter);
-
-        // converts the date to string
-        static string dateToString(const Date &date);
-
-        // converts the status to string
-        static string statusToString(const Status &status);
 
         // prints the vector of scooters
         static void printScooterVector(const vector<Scooter> &scooterVector);
