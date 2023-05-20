@@ -33,14 +33,8 @@ namespace Controller {
         // removes a scooter
         bool remove(const string &id);
 
-        // edits the mileage of a scooter
-        bool editMileage(const string &id, int newMileage);
-
-        // edits the location of a scooter
-        bool editLocation(const string &id, const string &newLastLocation);
-
-        // edits the status of a scooter
-        void editStatus(const string &id, Status &newStatus);
+        // edits an attribute of the scooter
+        bool edit(const string& id, const string& attribute, const string& newAttribute);
 
         // sorts the vector by the commission date in ascending order
         vector<Scooter> sortedByCommissionDate();
