@@ -10,8 +10,6 @@ using UserInterface::UI, std::cout, std::cin, std::to_string, Domain::User, Doma
 
 UI::UI(shared_ptr<Ctr> ctrObj) : controller(std::move(ctrObj)) {}
 
-// TODO - la unele optiuni trebuie dat enter de mai multe ori pentru a iesi din meniu
-
 void UI::startUI() {
     cout << string(30, '\n');
 
@@ -69,25 +67,21 @@ void UI::ownerMenu() {
         switch (optionInt) {
             case 1:
                 addScooter();
-                cin.ignore();
                 cout << "Press any key to continue...";
                 cin.get();
                 continue;
             case 2:
                 deleteScooter();
-                cin.ignore();
                 cout << "Press any key to continue...";
                 cin.get();
                 continue;
             case 3:
                 editScooter();
-                cin.ignore();
                 cout << "Press any key to continue...";
                 cin.get();
                 continue;
             case 4:
                 searchByLocation();
-                cin.ignore();
                 cout << "Press any key to continue...";
                 cin.get();
                 continue;
@@ -150,7 +144,6 @@ void UI::customerMenu() {
         switch (optionInt) {
             case 1:
                 searchByLocation();
-                cin.ignore();
                 cout << "Press any key to continue...";
                 cin.get();
                 continue;
@@ -236,9 +229,10 @@ void UI::addScooter() {
         status = outOfService;
     }
 
-    controller->add(id, model, {year, month, day}, mileage, lastLocation, status);
-
-    cout << "\nThe scooter has been added to the repository!\n\n";
+    if(controller->add(id, model, {year, month, day}, mileage, lastLocation, status))
+        cout << "\nThe scooter has been added to the repository!\n\n";
+    else
+        cout << "\nFailed to add the scooter!\n\n";
 }
 
 
@@ -256,16 +250,10 @@ void UI::deleteScooter() {
         cout << "\nNo scooter id matched your input!\n";
 }
 
-
-// TODO - la location si mileage nu se salveaza primul caracter (ex ptr 123 -> 23)
-// TODO - clean up
-// TODO - unsuccessfully edited
 void UI::editScooter() {
     cout << "~~~~~  Editing a scooter  ~~~~~\n\n";
 
-    string id, newLastLocation, user_input, choice;
-    int newMileage;
-    Status newStatus;
+    string id, newMileage, user_input, choice;
 
     cout << "Type the id of the scooter:";
     cin.ignore();
@@ -284,39 +272,27 @@ void UI::editScooter() {
     cout << "What would you like to edit to this scooter? (Mileage / Last Location / Status):";
     getline(cin, choice);
 
-    if (choice == "Mileage") {
-        cout << "Type the new mileage of the scooter:";
-        cin.ignore();
+    if (choice == "Mileage"){
+        cout << "Enter the new mileage:";
         getline(cin, user_input);
-        newMileage = stoi(user_input);
-        controller->editMileage(id, newMileage);
-        return;
-    }
-    if (choice == "Last Location") {
-        cout << "Type the new last location of the scooter:";
-        cin.ignore();
-        getline(cin, newLastLocation);
-        controller->editLocation(id, newLastLocation);
-        return;
-    }
-    if (choice == "Status") {
-        cin.ignore();
-        cout << "Type the new status of the new scooter (parked, reserved, in use, in maintenance, out of service):";
+        if (controller->edit(id, "mileage", user_input))
+            cout << "Mileage updated successfully\n!";
+        else
+            cout << "Failed to update the mileage!\n";
+    }else if (choice == "Last Location"){
+        cout << "Enter the last location:";
         getline(cin, user_input);
-
-        if (user_input == "parked") {
-            newStatus = parked;
-        } else if (user_input == "reserved") {
-            newStatus = reserved;
-        } else if (user_input == "in use") {
-            newStatus = inUse;
-        } else if (user_input == "in maintenance") {
-            newStatus = inMaintenance;
-        } else if (user_input == "out of service") {
-            newStatus = outOfService;
-        }
-        controller->editStatus(id, newStatus);
-        return;
+        if (controller->edit(id, "lastLocation", user_input))
+            cout << "Last location updated successfully!\n";
+        else
+            cout << "Failed to update the last location!\n";
+    }else if (choice == "Status"){
+        cout << "Enter the new status:";
+        getline(cin, user_input);
+        if (controller->edit(id, "status", user_input))
+            cout << "Status updated successfully!\n";
+        else
+            cout << "Failed to update the status!\n";
     }
 }
 
