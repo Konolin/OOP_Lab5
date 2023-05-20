@@ -3,12 +3,12 @@
 #include <exception>
 
 
-using Controller::Ctr, std::invalid_argument, Domain::compareDateAscending, std::exception;
+using Controller::Ctr, std::invalid_argument, Domain::compareDateAscending, std::exception, Domain::statusToString;
 
 
 Ctr::Ctr(shared_ptr<InMemoryRepository> repoObj) : repository(std::move(repoObj)) {}
 
-
+//TODO - for some reason cu tot cu data check nu se poate adauaga un scooter. Fara data check merge.
 void Ctr::dataCheck(const string &id, const string &model, Date commissionDate, int mileage,
                     const string &lastLocation) {
     // check if the id has exactly 3 letters
@@ -47,13 +47,12 @@ bool Ctr::add(const string &id, const string &model, const Date &commissionDate,
               const string &lastLocation, const Status &status) {
     try {
         dataCheck(id, model, commissionDate, mileage, lastLocation);
+        Scooter scooter(id, model, commissionDate, mileage, lastLocation, status);
+        repository->add(scooter);
+        return true;
     } catch (std::exception &e) {
         return false;
     }
-
-    Scooter scooter(id, model, commissionDate, mileage, lastLocation, status);
-    repository->add(scooter);
-    return true;
 }
 
 
@@ -70,40 +69,44 @@ bool Ctr::remove(const string &id) {
 }
 
 
-bool Ctr::editMileage(const string &id, int newMileage) {
+bool Ctr::edit(const string& id, const string& attribute, const string& newAttribute){
     try {
         Scooter scooter = repository->getById(id);
-        scooter.setMileage(newMileage);
-        repository->update(scooter);
-        return true;
-    } catch (exception &e) {
-        return false;
+
+        if (attribute == "mileage") {
+            int newMileage = stoi(newAttribute);
+            scooter.setMileage(newMileage);
+        } else if (attribute == "lastLocation") {
+            scooter.setLastLocation(newAttribute);
+        } else if (attribute == "status") {
+            Status newStatus;
+            if (newAttribute == "parked") {
+                newStatus = Status::parked;
+                scooter.setStatus(newStatus);
+            }else if (newAttribute == "in use") {
+                newStatus = Status::inUse;
+                scooter.setStatus(newStatus);
+            }else if (newAttribute == "in maintenance") {
+                newStatus = Status::inMaintenance;
+                scooter.setStatus(newStatus);
+            }else if (newAttribute == "out of service") {
+                newStatus = Status::outOfService;
+                scooter.setStatus(newStatus);
+            }else if (newAttribute == "reserved") {
+                newStatus = Status::reserved;
+                scooter.setStatus(newStatus);
+            }else
+                return false;
+        } else {
+            return false;  // Invalid attribute
+        }
+            repository->update(scooter);
+            return true;
+
+    } catch (exception& e) {
+        return false;  // Failed to edit scooter
     }
 }
-
-
-bool Ctr::editLocation(const string &id, const string &newLastLocation) {
-    try {
-        Scooter scooter = repository->getById(id);
-        scooter.setLastLocation(newLastLocation);
-        repository->update(scooter);
-        return true;
-    } catch (exception &e) {
-        return false;
-    }
-}
-
-
-void Ctr::editStatus(const string &id, Status &newStatus) {
-    try {
-        Scooter scooter = repository->getById(id);
-        scooter.setStatus(newStatus);
-        repository->update(scooter);
-    } catch (exception &e) {
-        return;
-    }
-}
-
 
 vector<Scooter> Ctr::sortedByCommissionDate() {
     vector<Scooter> sortedVector = repository->getAll();
