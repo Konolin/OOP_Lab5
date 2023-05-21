@@ -36,32 +36,23 @@ void CSVRepository::add(const Scooter &newObject) {
 void CSVRepository::remove(const Scooter &removedObject) {
     // Open the input file for reading
     std::ifstream inputFile(fileName);
-    if (!inputFile.is_open()) {
-        throw std::runtime_error("File could not be open for reading.");
-        return;
-    }
 
     // Open a temporary output file for writing
     std::ofstream tempFile("temp.csv");
-    if (!tempFile.is_open()) {
-        throw std::runtime_error("File could not be open for removal.");
-        inputFile.close();
-        return;
-    }
 
-    string line;
+    std::string line;
     bool found = false;
-    while (getline(inputFile, line)) {
-        // Parse the line to retrieve the object data
-        // Assuming the CSV format: id, model, commissionDate, mileage, lastLocation, status
-        string id, model, commissionDate, mileageStr, lastLocation, statusStr;
+    while (std::getline(inputFile, line)) {
+        std::string id, model, commissionDateDay, commissionDateMonth, commissionDateYear, mileageStr, lastLocation, statusStr;
         std::stringstream ss(line);
-        getline(ss, id, ',');
-        getline(ss, model, ',');
-        getline(ss, commissionDate, ',');
-        getline(ss, mileageStr, ',');
-        getline(ss, lastLocation, ',');
-        getline(ss, statusStr, ',');
+        std::getline(ss, id, ',');
+        std::getline(ss, model, ',');
+        std::getline(ss, commissionDateDay, ',');
+        std::getline(ss, commissionDateMonth, ',');
+        std::getline(ss, commissionDateYear, ',');
+        std::getline(ss, mileageStr, ',');
+        std::getline(ss, lastLocation, ',');
+        std::getline(ss, statusStr, ',');
 
         // Compare the ID of the current object with the removedObject
         if (id == removedObject.getId()) {
@@ -78,12 +69,22 @@ void CSVRepository::remove(const Scooter &removedObject) {
     tempFile.close();
 
     if (found) {
-        // Replace the original file with the temporary file
-        if (std::rename("temp.csv", fileName.c_str()) != 0) {
-            throw std::runtime_error("Unable to replace the original file.");
-        }
-    } else {
+        // Open the temporary file for reading
+        std::ifstream tempInputFile("temp.csv");
+
+        // Open the original file for writing
+        std::ofstream outputFile(fileName, std::ofstream::trunc);
+
+        // Overwrite the original file with the content of the temporary file
+        outputFile << tempInputFile.rdbuf();
+
+        // Close the files
+        tempInputFile.close();
+        outputFile.close();
+
         std::remove("temp.csv");  // Remove the temporary file
+    } else {
+        std::remove("temp.csv");
         throw std::runtime_error("Object not found in the file.");
     }
 }
@@ -192,40 +193,33 @@ Scooter CSVRepository::getById(const string &objectId) {
 void CSVRepository::update(const Scooter &updatedEntity) {
     // Open the input file for reading
     std::ifstream inputFile(fileName);
-    if (!inputFile.is_open()) {
-        throw std::runtime_error("Unable to open file for reading.");
-    }
 
     // Open a temporary output file for writing
     std::ofstream tempFile("temp.csv");
-    if (!tempFile.is_open()) {
-        inputFile.close();
-        throw std::runtime_error("Unable to open temporary file for writing.");
-    }
 
     std::string line;
     bool found = false;
     while (std::getline(inputFile, line)) {
-        string id, model, commissionDateDay, commissionDateMonth, commissionDateYear, mileageStr, lastLocation, statusStr;
+        std::string id, model, commissionDateDay, commissionDateMonth, commissionDateYear, mileageStr, lastLocation, statusStr;
         std::stringstream ss(line);
-        getline(ss, id, ',');
-        getline(ss, model, ',');
-        getline(ss, commissionDateDay, ',');
-        getline(ss, commissionDateMonth, ',');
-        getline(ss, commissionDateYear, ',');
-        getline(ss, mileageStr, ',');
-        getline(ss, lastLocation, ',');
-        getline(ss, statusStr, ',');
-        getline(ss, statusStr, ',');
+        std::getline(ss, id, ',');
+        std::getline(ss, model, ',');
+        std::getline(ss, commissionDateDay, ',');
+        std::getline(ss, commissionDateMonth, ',');
+        std::getline(ss, commissionDateYear, ',');
+        std::getline(ss, mileageStr, ',');
+        std::getline(ss, lastLocation, ',');
+        std::getline(ss, statusStr, ',');
+        std::getline(ss, statusStr, ',');
 
         if (id == updatedEntity.getId()) {
             // Update the fields with the new values
-            string updatedLine = updatedEntity.getId() + ","
+            std::string updatedLine = updatedEntity.getId() + ","
                                       + updatedEntity.getModel() + ","
-                                      + to_string(updatedEntity.getCommissionDate().day) + ","
-                                      + to_string(updatedEntity.getCommissionDate().month) + ","
-                                      + to_string(updatedEntity.getCommissionDate().year) + ","
-                                      + to_string(updatedEntity.getMileage()) + ","
+                                      + std::to_string(updatedEntity.getCommissionDate().day) + ","
+                                      + std::to_string(updatedEntity.getCommissionDate().month) + ","
+                                      + std::to_string(updatedEntity.getCommissionDate().year) + ","
+                                      + std::to_string(updatedEntity.getMileage()) + ","
                                       + updatedEntity.getLastLocation() + ","
                                       + // Convert updatedEntity.getStatus() to string
                                       +"\n";
@@ -242,12 +236,22 @@ void CSVRepository::update(const Scooter &updatedEntity) {
     tempFile.close();
 
     if (found) {
-        // Replace the original file with the temporary file
-        if (std::rename("temp.csv", fileName.c_str()) != 0) {
-            throw std::runtime_error("Unable to replace the original file.");
-        }
-    } else {
+        // Open the temporary file for reading
+        std::ifstream tempInputFile("temp.csv");
+
+        // Open the original file for writing
+        std::ofstream outputFile(fileName, std::ofstream::trunc);
+
+        // Overwrite the original file with the content of the temporary file
+        outputFile << tempInputFile.rdbuf();
+
+        // Close the files
+        tempInputFile.close();
+        outputFile.close();
+
         std::remove("temp.csv");  // Remove the temporary file
+    } else {
+        std::remove("temp.csv");
         throw std::runtime_error("Object not found in the file.");
     }
 }
