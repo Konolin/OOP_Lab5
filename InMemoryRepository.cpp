@@ -53,4 +53,5 @@ void InMemoryRepository::update(const Scooter &updatedEntity) {
             scooter = updatedEntity;
             return;
         }
+    throw std::runtime_error("Scooter was not found.");
 }

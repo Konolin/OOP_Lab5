@@ -9,8 +9,8 @@ using Repository::InMemoryRepository, Controller::Ctr, UserInterface::UI, Test::
 
 
 int main() {
-//    Tests testsObj;
-//    testsObj.testAll();
+    Tests testsObj;
+    testsObj.testAll();
 
     UI ui;
 
