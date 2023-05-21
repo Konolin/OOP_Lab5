@@ -7,7 +7,9 @@ namespace Test {
     private:
         static void testDomain();
 
-        void testRepository();
+        void testInMemoryRepository();
+
+        void testCSVRepository();
 
         void testController();
 

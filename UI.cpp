@@ -1,6 +1,7 @@
 #include "UI.h"
 #include "User.h"
-#include <utility>
+#include "CSVFileRepository.h"
+#include "InMemoryRepository.h"
 #include <iostream>
 
 
@@ -8,12 +9,25 @@ using UserInterface::UI, std::cout, std::cin, std::to_string, Domain::User, Doma
         Domain::parked, Domain::reserved, Domain::outOfService, std::exception, Domain::User;
 
 
-UI::UI(shared_ptr<Ctr> ctrObj) : controller(std::move(ctrObj)) {}
+UI::UI()= default;
+
 
 void UI::startUI() {
     cout << string(30, '\n');
 
     string userInput;
+
+    cout << "Select a repository type (csv / memory): ";
+    cin >> userInput;
+
+    if (userInput == "csv") {
+        auto repository = std::make_shared<Repository::CSVRepository>();
+        controller = std::make_shared<Ctr>(repository);
+    }
+    else {
+        auto repository = std::make_shared<Repository::InMemoryRepository>();
+        controller = std::make_shared<Ctr>(repository);
+    }
 
     cout << "Select a role (owner / customer): ";
     cin >> userInput;

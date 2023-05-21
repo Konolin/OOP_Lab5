@@ -27,7 +27,7 @@ namespace Repository {
         // returns the scooter with the corresponding index
         Scooter getById(const string &id) override;
 
-        // updates the specified entity, returns false if the entity wasn't found
+        // updates the specified entity
         void update(const Scooter &updatedEntity) override;
     };
 }

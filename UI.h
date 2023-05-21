@@ -55,8 +55,7 @@ namespace UserInterface {
         static void printScooterVector(const vector<Scooter> &scooterVector);
 
     public:
-        // constructor
-        UI(shared_ptr<Ctr> ctrObj);
+        UI();
 
         // gets the role form the user and starts the menu
         void startUI();
