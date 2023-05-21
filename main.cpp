@@ -12,10 +12,7 @@ int main() {
 //    Tests testsObj;
 //    testsObj.testAll();
 
-//    auto repository = std::make_shared<InMemoryRepository>();
-    auto repository = std::make_shared<CSVRepository>();
-    auto controller = std::make_shared<Ctr>(repository);
-    UI ui(controller);
+    UI ui;
 
     ui.startUI();
 
