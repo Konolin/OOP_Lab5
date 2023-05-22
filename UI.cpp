@@ -204,31 +204,31 @@ void UI::addScooter() {
 
     cin.ignore();
 
-    cout << "Type the ID of the new scooter (3 letters):";
+    cout << "Type the ID of the new scooter (3 letters): ";
     getline(cin, id);
 
-    cout << "Type the model of the new scooter:";
+    cout << "Type the model of the new scooter: ";
     getline(cin, model);
 
     cout << "Type the commission date of the new scooter:\n";
-    cout << "Year:";
+    cout << "Year: ";
     getline(cin, user_input);
     year = stoi(user_input);
-    cout << "Month:";
+    cout << "Month: ";
     getline(cin, user_input);
     month = stoi(user_input);
-    cout << "Day:";
+    cout << "Day: ";
     getline(cin, user_input);
     day = stoi(user_input);
 
-    cout << "Type the mileage of the new scooter:";
+    cout << "Type the mileage of the new scooter: ";
     getline(cin, user_input);
     mileage = stoi(user_input);
 
-    cout << "Type the last location of the new scooter:";
+    cout << "Type the last location of the new scooter: ";
     getline(cin, lastLocation);
 
-    cout << "Type the status of the new scooter (parked, reserved, in use, in maintenance, out of service):";
+    cout << "Type the status of the new scooter (parked, reserved, in use, in maintenance, out of service): ";
     getline(cin, user_input);
 
     if (user_input == "parked") {
@@ -283,25 +283,25 @@ void UI::editScooter() {
     cout << "Last Location: " << scooter.getLastLocation() << '\n';
     cout << "Status: " << statusToString(scooter.getStatus()) << "\n\n";
 
-    cout << "What would you like to edit to this scooter? (Mileage / Last Location / Status):";
+    cout << "What would you like to edit to this scooter? (Mileage / Last Location / Status): ";
     getline(cin, choice);
 
     if (choice == "Mileage"){
-        cout << "Enter the new mileage:";
+        cout << "Enter the new mileage: ";
         getline(cin, user_input);
         if (controller->edit(id, "mileage", user_input))
             cout << "Mileage updated successfully\n!";
         else
             cout << "Failed to update the mileage!\n";
     }else if (choice == "Last Location"){
-        cout << "Enter the last location:";
+        cout << "Enter the last location: ";
         getline(cin, user_input);
         if (controller->edit(id, "lastLocation", user_input))
             cout << "Last location updated successfully!\n";
         else
             cout << "Failed to update the last location!\n";
     }else if (choice == "Status"){
-        cout << "Enter the new status:";
+        cout << "Enter the new status (parked, reserved, in use, in maintenance, out of service): ";
         getline(cin, user_input);
         if (controller->edit(id, "status", user_input))
             cout << "Status updated successfully!\n";
