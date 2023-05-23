@@ -271,6 +271,7 @@ void UI::deleteScooter() {
         cout << "\nNo scooter id matched your input!\n";
 }
 
+
 void UI::editScooter() {
     cout << "~~~~~  Editing a scooter  ~~~~~\n\n";
 
@@ -433,7 +434,7 @@ void UI::getAllReservedScooters() {
         cout << "Here is a list of all reserved scooters:\n";
         printScooterVector(user.seeAllReservedScooters());
     }else
-        cout << "There are no reserved scooters!\n";
+        cout << "\nThere are no reserved scooters!\n";
 }
 
 
