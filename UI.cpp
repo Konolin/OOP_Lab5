@@ -133,8 +133,9 @@ void UI::customerMenuUI() {
     cout << "2. Filter scooters scooters\n";
     cout << "3. Reserve a scooter\n";
     cout << "4. Use a scooter\n";
-    cout << "5. Return to user choice\n";
-    cout << "6. Exit\n\n";
+    cout << "5. See all reserved scooters\n";
+    cout << "6. Return to user choice\n";
+    cout << "7. Exit\n\n";
     cout << "Choose an option: ";
 }
 
@@ -180,8 +181,14 @@ void UI::customerMenu() {
                 cin.get();
                 continue;
             case 5:
-                startUI();
+                getAllReservedScooters();
+                cin.ignore();
+                cout << "Press any key to continue...";
+                cin.get();
+                continue;
             case 6:
+                startUI();
+            case 7:
                 break;
             default:
                 cin.ignore();
@@ -386,9 +393,10 @@ void UI::reserveScooter() {
         cout << "Enter the id of the scooter you want to reserve: ";
         cin >> id;
 
-        if (controller->reserveScooter(id))
+        if (controller->reserveScooter(id)) {
             cout << "\nScooter successfully reserved\n\n";
-        else
+            user.addReservedScooter(controller->repository->getById(id));
+        }else
             cout << "\nScooter could not be reserved.\n\n";
     } else {
         cout << "No scooters are available at this moment.\n\n";
@@ -418,6 +426,16 @@ void UI::useScooter() {
     }
 }
 
+void UI::getAllReservedScooters() {
+    cout << "~~~~ Reserved scooters ~~~~\n\n";
+    vector<Scooter> reservedScooters = user.seeAllReservedScooters();
+    if (!reservedScooters.empty()) {
+        cout << "Here is a list of all reserved scooters:\n";
+        printScooterVector(user.seeAllReservedScooters());
+    }else
+        cout << "There are no reserved scooters!\n";
+}
+
 
 void UI::printScooterVector(const vector<Scooter> &scooterVector) {
     cout << '\n';
@@ -428,4 +446,3 @@ void UI::printScooterVector(const vector<Scooter> &scooterVector) {
     }
     cout << '\n';
 }
-
