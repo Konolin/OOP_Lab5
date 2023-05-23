@@ -24,5 +24,7 @@ namespace Domain {
         [[nodiscard]] string getType() const;
 
         void addReservedScooter(const Scooter &reservedScooter);
+        
+        vector<Scooter> seeAllReservedScooters();
     };
 }
