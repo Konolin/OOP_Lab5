@@ -6,7 +6,7 @@
 
 using Repository::CSVRepository, std::to_string;
 
-
+// TODO - corectare nume fisier
 CSVRepository::CSVRepository() {
     fileName = "Scooters.csv";
 }
