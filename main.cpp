@@ -6,7 +6,7 @@
 #include <iostream>
 
 
-using Repository::InMemoryRepository, Controller::Ctr, UserInterface::UI, Test::Tests, Repository::CSVRepository;
+using Repository::InMemoryRepository, Controller::Ctr, UserInterface::UI, Test::Tests, Repository::CSVRepository, std::make_shared;
 
 
 int main() {
@@ -14,20 +14,20 @@ int main() {
     testsObj.testAll();
 
     string repoType;
-    std::cout << "Choose the repository type(inMemo/ csv): ";
+    std::cout << "Choose the repository type (inMemo/csv): ";
     std::cin >> repoType;
 
+    shared_ptr<IRepository> repo;
     if (repoType == "csv") {
-        shared_ptr<IRepository> repo = std::make_shared<CSVRepository>();
-        shared_ptr<Ctr> controller = std::make_shared<Ctr>(repo);
-        UI ui(controller);
-        ui.startUI();
+        repo = make_shared<CSVRepository>();
     } else {
-        shared_ptr<IRepository> repo = std::make_shared<InMemoryRepository>();
-        shared_ptr<Ctr> controller = std::make_shared<Ctr>(repo);
-        UI ui(controller);
-        ui.startUI();
+        repo = make_shared<InMemoryRepository>();
     }
+
+   shared_ptr<Ctr> controller = make_shared<Ctr>(repo);
+    UI ui(controller);
+    ui.startUI();
 
     return 0;
 }
+
