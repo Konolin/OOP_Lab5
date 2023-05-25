@@ -13,15 +13,20 @@ using std::string, Domain::Scooter, std::vector, Domain::User;
 namespace Domain {
     class User {
     private:
-        string userType{};
+        string username{};
+        string password{};
         vector<Scooter> reservedScooters{};
 
     public:
-        User(const string &userType);
+        explicit User(const string &username = "None", const string &password = "None");
 
-        User();
+        [[nodiscard]] string getName() const;
 
-        [[nodiscard]] string getType() const;
+        [[nodiscard]] string getPassword() const;
+
+        void setName(const string &newName);
+
+        void setPassword(const string &newPassword);
 
         void addReservedScooter(const Scooter &reservedScooter);
         

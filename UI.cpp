@@ -14,18 +14,24 @@ UI::UI(shared_ptr<Ctr> _controller) : controller(std::move(_controller)) {}
 void UI::startUI() {
     cout << string(30, '\n');
 
-    string userInput;
+    string userType, userPassword;
 
     cout << "Select a role (owner / customer): ";
-    cin >> userInput;
+    cin >> userType;
+    cout << "Enter the password (s8cr8t / tr1ck) ~doar de test~ : ";
+    cin >> userPassword;
 
-    user = User(userInput);
-
-    if (user.getType() == "owner") { ownerMenu(); }
-    else if (user.getType() == "customer") { customerMenu(); }
-    else {
+    if (userType == "owner" && userPassword == "s8cr8t") {
+        user.setName(userType);
+        user.setPassword(userPassword);
+        ownerMenu();
+    } else if (userType == "customer" && userPassword == "tr1ck") {
+        user.setName(userType);
+        user.setPassword(userPassword);
+        customerMenu();
+    } else {
         cin.ignore();
-        cout << "Invalid input, try again.\n";
+        cout << "Invalid input, or user type + password, try again.\n";
         cout << "Press any key to continue...";
         cin.get();
         startUI();
