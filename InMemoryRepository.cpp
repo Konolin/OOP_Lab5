@@ -40,18 +40,21 @@ vector<Scooter> InMemoryRepository::getAll() {
 
 
 Scooter InMemoryRepository::getById(const string &id) {
-    for (auto &scooter: getAll())
-        if (scooter.getId() == id)
+    for (auto &scooter: getAll()) {
+        if (scooter.getId() == id) {
             return scooter;
+        }
+    }
     throw std::runtime_error("Scooter was not found");
 }
 
 
 void InMemoryRepository::update(const Scooter &updatedEntity) {
-    for (auto &scooter: scooterVector)
+    for (auto &scooter: scooterVector) {
         if (scooter.getId() == updatedEntity.getId()) {
             scooter = updatedEntity;
             return;
         }
+    }
     throw std::runtime_error("Scooter was not found.");
 }
