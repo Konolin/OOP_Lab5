@@ -57,7 +57,7 @@ bool Ctr::add(const string &id, const string &model, const Date &commissionDate,
               const string &lastLocation, const Status &status) {
     try {
         //TODO - cu data check nu se poate adauaga un scooter
-//        dataCheck(id, model, commissionDate, mileage, lastLocation);
+        dataCheck(id, model, commissionDate, mileage, lastLocation);
         Scooter scooter(id, model, commissionDate, mileage, lastLocation, status);
         repository->add(scooter);
         return true;

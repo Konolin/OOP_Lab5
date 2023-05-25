@@ -64,7 +64,7 @@ namespace UserInterface {
         void showAllReservedScooters();
 
     public:
-        UI(shared_ptr<Ctr> controller);
+        explicit UI(shared_ptr<Ctr> controller);
 
         // gets the role form the user and starts the menu
         void startUI();

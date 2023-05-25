@@ -234,15 +234,15 @@ void UI::addScooter() {
     getline(cin, model);
 
     cout << "Type the commission date of the new scooter:\n";
-    cout << "Year: ";
-    getline(cin, user_input);
-    year = stoi(user_input);
-    cout << "Month: ";
-    getline(cin, user_input);
-    month = stoi(user_input);
     cout << "Day: ";
     getline(cin, user_input);
     day = stoi(user_input);
+    cout << "Month: ";
+    getline(cin, user_input);
+    month = stoi(user_input);
+    cout << "Year: ";
+    getline(cin, user_input);
+    year = stoi(user_input);
 
     cout << "Type the mileage of the new scooter: ";
     getline(cin, user_input);
@@ -266,7 +266,7 @@ void UI::addScooter() {
         status = outOfService;
     }
 
-    if (controller->add(id, model, {year, month, day}, mileage, lastLocation, status)) {
+    if (controller->add(id, model, {day, month, year}, mileage, lastLocation, status)) {
         cout << "\nThe scooter has been added to the repository!\n\n";
     } else {
         cout << "\nFailed to add the scooter!\n\n";
