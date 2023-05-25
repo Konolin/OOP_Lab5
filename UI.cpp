@@ -166,7 +166,7 @@ void UI::customerMenu() {
                 cin.get();
                 continue;
             case 5:
-                getAllReservedScooters();
+                showAllReservedScooters();
                 cin.ignore();
                 cout << "Press any key to continue...";
                 cin.get();
@@ -403,12 +403,14 @@ void UI::useScooter() {
     } else { cout << "No scooters are available at this moment.\n\n"; }
 }
 
-void UI::getAllReservedScooters() {
+void UI::showAllReservedScooters() {
     cout << "~~~~ Reserved scooters ~~~~\n\n";
-    vector<Scooter> reservedScooters = user.seeAllReservedScooters();
+
+    vector<Scooter> reservedScooters = user.getAllUserReservedScooters();
     if (!reservedScooters.empty()) {
         cout << "Here is a list of all reserved scooters:\n";
-        printScooterVector(user.seeAllReservedScooters());
+        printScooterVector(reservedScooters);
+
     } else { cout << "\nThere are no reserved scooters!\n"; }
 }
 

@@ -12,7 +12,7 @@ void User::addReservedScooter(const Scooter &reservedScooter) {
     reservedScooters.push_back(reservedScooter);
 }
 
-vector<Scooter> User::seeAllReservedScooters() {
+vector<Scooter> User::getAllUserReservedScooters() {
     return reservedScooters;
 }
 

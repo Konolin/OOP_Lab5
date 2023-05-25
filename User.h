@@ -25,6 +25,6 @@ namespace Domain {
 
         void addReservedScooter(const Scooter &reservedScooter);
         
-        vector<Scooter> seeAllReservedScooters();
+        vector<Scooter> getAllUserReservedScooters();
     };
 }

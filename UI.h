@@ -55,7 +55,7 @@ namespace UserInterface {
         static void printScooterVector(const vector<Scooter> &scooterVector);
 
         // prints all reserved scooters
-        void getAllReservedScooters();
+        void showAllReservedScooters();
 
     public:
         UI(shared_ptr<Ctr> controller);
