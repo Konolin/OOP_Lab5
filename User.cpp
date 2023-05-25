@@ -31,6 +31,16 @@ void User::addReservedScooter(const Scooter &reservedScooter) {
 }
 
 
-vector<Scooter> User::getAllUserReservedScooters() {
+vector<Scooter> User::getAllReservedScooters() {
     return reservedScooters;
+}
+
+
+void User::addInUseScooter(const Scooter &inUseScooter) {
+    inUseScooters.push_back(inUseScooter);
+}
+
+
+vector<Scooter> User::getAllInUseScooters() {
+    return inUseScooters;
 }

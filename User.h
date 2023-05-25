@@ -16,6 +16,7 @@ namespace Domain {
         string username{};
         string password{};
         vector<Scooter> reservedScooters{};
+        vector<Scooter> inUseScooters{};
 
     public:
         explicit User(const string &username = "None", const string &password = "None");
@@ -30,6 +31,10 @@ namespace Domain {
 
         void addReservedScooter(const Scooter &reservedScooter);
         
-        vector<Scooter> getAllUserReservedScooters();
+        vector<Scooter> getAllReservedScooters();
+
+        void addInUseScooter(const Scooter &inUseScooter);
+
+        vector<Scooter> getAllInUseScooters();
     };
 }

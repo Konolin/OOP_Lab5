@@ -148,10 +148,11 @@ void UI::customerMenuUI() {
     cout << "1. Search scooter by location\n";
     cout << "2. Filter scooters scooters\n";
     cout << "3. Reserve a scooter\n";
-    cout << "4. Use a scooter\n";
-    cout << "5. See all reserved scooters\n";
-    cout << "6. Return to user choice\n";
-    cout << "7. Exit\n\n";
+    cout << "4. See all reserved scooters\n";
+    cout << "5. Use a scooter\n";
+    cout << "6. See all your in use scooters\n";
+    cout << "7. Return to user choice\n";
+    cout << "8. Exit\n\n";
     cout << "Choose an option: ";
 }
 
@@ -191,20 +192,26 @@ void UI::customerMenu() {
                 cin.get();
                 continue;
             case 4:
-                useScooter();
-                cin.ignore();
-                cout << "Press any key to continue...";
-                cin.get();
-                continue;
-            case 5:
                 showAllReservedScooters();
                 cin.ignore();
                 cout << "Press any key to continue...";
                 cin.get();
                 continue;
+            case 5:
+                useScooter();
+                cin.ignore();
+                cout << "Press any key to continue...";
+                cin.get();
+                continue;
             case 6:
-                startUI();
+                showAllInUseScooter();
+                cin.ignore();
+                cout << "Press any key to continue...";
+                cin.get();
+                continue;
             case 7:
+                startUI();
+            case 8:
                 break;
             default:
                 cin.ignore();
@@ -448,6 +455,7 @@ void UI::useScooter() {
 
         if (controller->useScooter(id)) {
             cout << "\nScooter is now successfully in use.\n\n";
+            user.addInUseScooter(controller->repository->getById(id));
         } else {
             cout << "\nScooter can not be used right now.\n\n";
         }
@@ -460,7 +468,7 @@ void UI::useScooter() {
 void UI::showAllReservedScooters() {
     cout << "~~~~ Reserved scooters ~~~~\n";
 
-    vector<Scooter> reservedScooters = user.getAllUserReservedScooters();
+    vector<Scooter> reservedScooters = user.getAllReservedScooters();
     if (!reservedScooters.empty()) {
         cout << "Here is a list of all reserved scooters:\n\n";
         printScooterVector(reservedScooters);
@@ -479,5 +487,18 @@ void UI::printScooterVector(const vector<Scooter> &scooterVector) {
         index++;
     }
     cout << '\n';
+}
+
+void UI::showAllInUseScooter() {
+    cout << "~~~~ In use scooters ~~~~\n";
+
+    vector<Scooter> inUseScooters = user.getAllInUseScooters();
+    if (!inUseScooters.empty()) {
+        cout << "Here is a list of all scooters that are in your use:\n\n";
+        printScooterVector(inUseScooters);
+
+    } else {
+        cout << "\nYou have no scooters in use!\n\n";
+    }
 }
 
