@@ -14,7 +14,7 @@ void Tests::Tests::testAll() {
 
     testDomain();
     testInMemoryRepository();
-//    testCSVRepository();
+    testCSVRepository();
     testController();
 
     cout << "All tests done!\n\n\n";

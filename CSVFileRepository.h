@@ -12,6 +12,11 @@ namespace Repository {
     class CSVRepository : public IRepository {
     private:
         string fileName{};
+        vector<Scooter> scooterVector{};
+
+        vector<Scooter> readFromCSV();
+
+        void writeToCSV();
 
     public:
         CSVRepository();

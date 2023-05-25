@@ -65,6 +65,6 @@ namespace Domain {
         // overload for the != operator
         bool operator!=(const Scooter &other);
 
-        string scooterToString() const;
+        string toString() const;
     };
 }

@@ -106,13 +106,13 @@ bool Scooter::operator!=(const Scooter &other) {
 }
 
 
-string Scooter::scooterToString() const {
+string Scooter::toString() const {
     string strCommissionDate = Domain::dateToString(commissionDate);
     string strMileage = to_string(mileage);
     string strStatus = statusToString(status);
 
     string scooterString =
-            id + ", " + model + ", " + strCommissionDate + ", " + strMileage + ", " + lastLocation + ", " + strStatus;
+            id + ',' + model + ',' + strCommissionDate + ',' + strMileage + ',' + lastLocation + ',' + strStatus;
 
     return scooterString;
 }
@@ -146,5 +146,5 @@ string Domain::statusToString(const Domain::Status &status) {
 
 
 string Domain::dateToString(const Date &date) {
-    return '{' + to_string(date.day) + '/' + to_string(date.month) + '/' + to_string(date.year) + '}';
+    return to_string(date.day) + '-' + to_string(date.month) + '-' + to_string(date.year);
 }

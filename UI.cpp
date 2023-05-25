@@ -419,7 +419,7 @@ void UI::printScooterVector(const vector<Scooter> &scooterVector) {
     cout << '\n';
     int index = 1;
     for (const auto &scooter: scooterVector) {
-        cout << index << ". " << scooter.scooterToString() << '\n';
+        cout << index << ". " << scooter.toString() << '\n';
         index++;
     }
     cout << '\n';

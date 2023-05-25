@@ -24,7 +24,7 @@ int main() {
         repo = make_shared<InMemoryRepository>();
     }
 
-   shared_ptr<Ctr> controller = make_shared<Ctr>(repo);
+    shared_ptr<Ctr> controller = make_shared<Ctr>(repo);
     UI ui(controller);
     ui.startUI();
 
