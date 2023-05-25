@@ -35,14 +35,20 @@ Status Scooter::getStatus() const { return status; }
 
 
 void Scooter::setId(const string &newId) {
-    if (Ctr::hasThreeLetters(newId) && newId.size() == 3) { id = newId; }
-    else { throw invalid_argument("The id does not respect the convention (3 letters)."); }
+    if (Ctr::hasThreeLetters(newId) && newId.size() == 3) {
+        id = newId;
+    } else {
+        throw invalid_argument("The id does not respect the convention (3 letters).");
+    }
 }
 
 
 void Scooter::setModel(const string &newModel) {
-    if (!newModel.empty()) { model = newModel; }
-    else { throw invalid_argument("Model can not be empty."); }
+    if (!newModel.empty()) {
+        model = newModel;
+    } else {
+        throw invalid_argument("Model can not be empty.");
+    }
 }
 
 
@@ -71,14 +77,20 @@ void Scooter::setCommissionDate(const Date &newCommissionDate) {
 
 
 void Scooter::setMileage(int newMileage) {
-    if (newMileage > 0) { mileage = newMileage; }
-    else { throw invalid_argument("Mileage can not be negative."); }
+    if (newMileage > 0) {
+        mileage = newMileage;
+    } else {
+        throw invalid_argument("Mileage can not be negative.");
+    }
 }
 
 
 void Scooter::setLastLocation(const string &newLastLocation) {
-    if (!newLastLocation.empty()) { lastLocation = newLastLocation; }
-    else { throw invalid_argument("The last location can not be empty."); }
+    if (!newLastLocation.empty()) {
+        lastLocation = newLastLocation;
+    } else {
+        throw invalid_argument("The last location can not be empty.");
+    }
 }
 
 
@@ -119,9 +131,13 @@ string Scooter::toString() const {
 
 
 bool Domain::compareDateAscending(const Date &date1, const Date &date2) {
-    if (date1.year != date2.year) { return date1.year < date2.year; }
+    if (date1.year != date2.year) {
+        return date1.year < date2.year;
+    }
 
-    if (date1.month != date2.month) { return date1.month < date2.month; }
+    if (date1.month != date2.month) {
+        return date1.month < date2.month;
+    }
 
     return date1.day < date2.day;
 }

@@ -61,6 +61,7 @@ bool Ctr::add(const string &id, const string &model, const Date &commissionDate,
         Scooter scooter(id, model, commissionDate, mileage, lastLocation, status);
         repository->add(scooter);
         return true;
+
     } catch (std::exception &e) {
         return false;
     }
@@ -89,8 +90,10 @@ bool Ctr::edit(const string &id, const string &attribute, const string &newAttri
         if (attribute == "mileage") {
             int newMileage = stoi(newAttribute);
             scooter.setMileage(newMileage);
+
         } else if (attribute == "lastLocation") {
             scooter.setLastLocation(newAttribute);
+
         } else if (attribute == "status") {
             Status newStatus;
             if (newAttribute == "parked") {
@@ -108,8 +111,10 @@ bool Ctr::edit(const string &id, const string &attribute, const string &newAttri
             } else if (newAttribute == "reserved") {
                 newStatus = Status::reserved;
                 scooter.setStatus(newStatus);
-            } else
+            } else {
                 return false;
+            }
+
         } else {
             return false;  // Invalid attribute
         }

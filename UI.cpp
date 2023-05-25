@@ -237,7 +237,9 @@ void UI::addScooter() {
 
     if (controller->add(id, model, {year, month, day}, mileage, lastLocation, status)) {
         cout << "\nThe scooter has been added to the repository!\n\n";
-    } else { cout << "\nFailed to add the scooter!\n\n"; }
+    } else {
+        cout << "\nFailed to add the scooter!\n\n";
+    }
 }
 
 
@@ -249,8 +251,11 @@ void UI::deleteScooter() {
     cin.ignore();
     getline(cin, id);
 
-    if (controller->remove(id)) { cout << "\nThe scooter has been removed!\n"; }
-    else { cout << "\nNo scooter id matched your input!\n"; }
+    if (controller->remove(id)) {
+        cout << "\nThe scooter has been removed!\n";
+    } else {
+        cout << "\nNo scooter id matched your input!\n";
+    }
 }
 
 
@@ -280,22 +285,31 @@ void UI::editScooter() {
         cout << "Enter the new mileage: ";
         getline(cin, user_input);
 
-        if (controller->edit(id, "mileage", user_input)) { cout << "Mileage updated successfully\n!"; }
-        else { cout << "Failed to update the mileage!\n"; }
+        if (controller->edit(id, "mileage", user_input)) {
+            cout << "Mileage updated successfully\n!";
+        } else {
+            cout << "Failed to update the mileage!\n";
+        }
 
     } else if (choice == "Last Location") {
         cout << "Enter the last location: ";
         getline(cin, user_input);
 
-        if (controller->edit(id, "lastLocation", user_input)) { cout << "Last location updated successfully!\n"; }
-        else { cout << "Failed to update the last location!\n"; }
+        if (controller->edit(id, "lastLocation", user_input)) {
+            cout << "Last location updated successfully!\n";
+        } else {
+            cout << "Failed to update the last location!\n";
+        }
 
     } else if (choice == "Status") {
         cout << "Enter the new status (parked, reserved, in use, in maintenance, out of service): ";
         getline(cin, user_input);
 
-        if (controller->edit(id, "status", user_input)) { cout << "Status updated successfully!\n"; }
-        else { cout << "Failed to update the status!\n"; }
+        if (controller->edit(id, "status", user_input)) {
+            cout << "Status updated successfully!\n";
+        } else {
+            cout << "Failed to update the status!\n";
+        }
     }
 }
 
@@ -309,8 +323,11 @@ void UI::searchByLocation() {
     cout << '\n';
 
     vector<Scooter> filteredVector = controller->searchByLocation(location);
-    if (!filteredVector.empty()) { printScooterVector(filteredVector); }
-    else { cout << "No scooter with specified location was found.\n"; }
+    if (!filteredVector.empty()) {
+        printScooterVector(filteredVector);
+    } else {
+        cout << "No scooter with specified location was found.\n";
+    }
 }
 
 
@@ -376,8 +393,9 @@ void UI::reserveScooter() {
         if (controller->reserveScooter(id)) {
             cout << "\nScooter successfully reserved\n\n";
             user.addReservedScooter(controller->repository->getById(id));
-        } else
+        } else {
             cout << "\nScooter could not be reserved.\n\n";
+        }
     } else {
         cout << "No scooters are available at this moment.\n\n";
     }
@@ -397,10 +415,15 @@ void UI::useScooter() {
         cout << "Enter the id of the scooter you want to use: ";
         cin >> id;
 
-        if (controller->useScooter(id)) { cout << "\nScooter is now successfully in use.\n\n"; }
-        else { cout << "\nScooter can not be used right now.\n\n"; }
+        if (controller->useScooter(id)) {
+            cout << "\nScooter is now successfully in use.\n\n";
+        } else {
+            cout << "\nScooter can not be used right now.\n\n";
+        }
 
-    } else { cout << "No scooters are available at this moment.\n\n"; }
+    } else {
+        cout << "No scooters are available at this moment.\n\n";
+    }
 }
 
 void UI::showAllReservedScooters() {
@@ -411,7 +434,9 @@ void UI::showAllReservedScooters() {
         cout << "Here is a list of all reserved scooters:\n";
         printScooterVector(reservedScooters);
 
-    } else { cout << "\nThere are no reserved scooters!\n"; }
+    } else {
+        cout << "\nThere are no reserved scooters!\n";
+    }
 }
 
 
