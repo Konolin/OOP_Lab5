@@ -30,7 +30,12 @@ void InMemoryRepository::add(const Scooter &new_scooter) {
 
 
 void InMemoryRepository::remove(const Scooter &scooter) {
-    scooterVector.erase(std::remove(scooterVector.begin(), scooterVector.end(), scooter), scooterVector.end());
+    for (int i = 0; i < scooterVector.size(); i++) {
+        if (scooterVector[i] == scooter) {
+            scooterVector.erase(scooterVector.begin() + i);
+            return;
+        }
+    }
 }
 
 

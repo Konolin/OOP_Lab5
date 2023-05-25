@@ -28,8 +28,13 @@ void CSVRepository::add(const Scooter &newObject) {
 
 
 void CSVRepository::remove(const Scooter &removedObject) {
-    scooterVector.erase(std::remove(scooterVector.begin(), scooterVector.end(), removedObject), scooterVector.end());
-    writeToCSV();
+    for (int i = 0; i < scooterVector.size(); i++) {
+        if (scooterVector[i] == removedObject) {
+            scooterVector.erase(scooterVector.begin() + i);
+            writeToCSV();
+            return;
+        }
+    }
 }
 
 
