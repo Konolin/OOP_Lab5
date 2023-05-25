@@ -32,7 +32,7 @@ void UI::selectRepoType() {
     cin >> repoType;
 
     if (repoType == "csv") {
-        shared_ptr<IRepository> repo = std::make_shared<Repository::CSVRepository>();;
+        shared_ptr<IRepository> repo = std::make_shared<Repository::CSVRepository>();
         controller = std::make_shared<Ctr>(repo);
     } else if (repoType != "memo") {
         cin.ignore();
@@ -48,13 +48,10 @@ void UI::userCredentialsInput() {
 
     cout << "Select a role (owner / customer): ";
     cin >> userType;
-    cout << "Enter the password (s8cr8t / tr1ck) ~doar de test~ : ";
+    cout << "Enter the password (s8cr8t / tr1ck) ~de test~ : ";
     cin >> userPassword;
 
-    if (userType == "owner" && userPassword == "s8cr8t") {
-        user.setName(userType);
-        user.setPassword(userPassword);
-    } else if (userType == "customer" && userPassword == "tr1ck") {
+    if (userType == "owner" && userPassword == "s8cr8t" || userType == "customer" && userPassword == "tr1ck") {
         user.setName(userType);
         user.setPassword(userPassword);
     } else {
