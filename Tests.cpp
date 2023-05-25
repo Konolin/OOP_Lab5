@@ -162,6 +162,8 @@ void Tests::testCSVRepository() {
     repository.update(scooter);
     assert(repository.getById("IFW").getMileage() == 999);
 
+    repository.remove(scooter);
+
     cout << "Repository CSV test done!\n\n";
 }
 
