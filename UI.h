@@ -66,6 +66,9 @@ namespace UserInterface {
         // shows all in use scooters of a user
         void showAllInUseScooter();
 
+        // park a scooter by its id
+        void parkScooter();
+
     public:
         explicit UI(shared_ptr<Ctr> controller);
 

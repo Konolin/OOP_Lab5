@@ -151,8 +151,9 @@ void UI::customerMenuUI() {
     cout << "4. See all reserved scooters\n";
     cout << "5. Use a scooter\n";
     cout << "6. See all your in use scooters\n";
-    cout << "7. Return to user choice\n";
-    cout << "8. Exit\n\n";
+    cout << "7. Park a scooter\n";
+    cout << "8. Return to user choice\n";
+    cout << "9. Exit\n\n";
     cout << "Choose an option: ";
 }
 
@@ -210,8 +211,14 @@ void UI::customerMenu() {
                 cin.get();
                 continue;
             case 7:
-                startUI();
+                parkScooter();
+                cin.ignore();
+                cout << "Press any key to continue...";
+                cin.get();
+                continue;
             case 8:
+                startUI();
+            case 9:
                 break;
             default:
                 cin.ignore();
@@ -489,13 +496,40 @@ void UI::printScooterVector(const vector<Scooter> &scooterVector) {
     cout << '\n';
 }
 
+
 void UI::showAllInUseScooter() {
     cout << "~~~~ In use scooters ~~~~\n";
 
     vector<Scooter> inUseScooters = user.getAllInUseScooters();
     if (!inUseScooters.empty()) {
-        cout << "Here is a list of all scooters that are in your use:\n\n";
+        cout << "Here is a list of all scooters that are in your use:\n";
         printScooterVector(inUseScooters);
+
+    } else {
+        cout << "\nYou have no scooters in use!\n\n";
+    }
+}
+
+
+void UI::parkScooter() {
+    cout << "~~~~ In use scooters ~~~~\n";
+
+    vector<Scooter> inUseScooters = user.getAllInUseScooters();
+    if (!inUseScooters.empty()) {
+        cout << "Here is a list of all scooters that are in your use:\n";
+        printScooterVector(inUseScooters);
+
+        string scooterId;
+        cout << "Enter the id of the scooter you want to park: ";
+        cin >> scooterId;
+
+        for (const auto &scooter : inUseScooters) {
+            if (scooter.getId() == scooterId) {
+                // TODO astea si eventual un user repo
+//                controller.parkScooter(scooterId);
+//                user.removeScooter(scooterId);
+            }
+        }
 
     } else {
         cout << "\nYou have no scooters in use!\n\n";
