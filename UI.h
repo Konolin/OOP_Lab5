@@ -15,6 +15,12 @@ namespace UserInterface {
         shared_ptr<Ctr> controller;
         Domain::User user{};
 
+        // menu to select storage type
+        void selectRepoType();
+
+        // enter user info
+        void userCredentialsInput();
+
         // prints the owner menu options
         static void ownerMenuUI();
 

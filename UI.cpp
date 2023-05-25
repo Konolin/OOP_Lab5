@@ -1,5 +1,6 @@
 #include "UI.h"
 #include "User.h"
+#include "CSVFileRepository.h"
 #include <iostream>
 #include <utility>
 
@@ -14,6 +15,35 @@ UI::UI(shared_ptr<Ctr> _controller) : controller(std::move(_controller)) {}
 void UI::startUI() {
     cout << string(30, '\n');
 
+    selectRepoType();
+
+    userCredentialsInput();
+    if (user.getName() == "owner") {
+        ownerMenu();
+    } else {
+        customerMenu();
+    }
+}
+
+
+void UI::selectRepoType() {
+    string repoType;
+    cout << "Select the repository type (memo / csv): ";
+    cin >> repoType;
+
+    if (repoType == "csv") {
+        shared_ptr<IRepository> repo = std::make_shared<Repository::CSVRepository>();;
+        controller = std::make_shared<Ctr>(repo);
+    } else if (repoType != "memo") {
+        cin.ignore();
+        cout << "Invalid input, try again.\n";
+        cout << "Press any key to continue...";
+        cin.get();
+        selectRepoType();
+    }
+}
+
+void UI::userCredentialsInput() {
     string userType, userPassword;
 
     cout << "Select a role (owner / customer): ";
@@ -24,17 +54,15 @@ void UI::startUI() {
     if (userType == "owner" && userPassword == "s8cr8t") {
         user.setName(userType);
         user.setPassword(userPassword);
-        ownerMenu();
     } else if (userType == "customer" && userPassword == "tr1ck") {
         user.setName(userType);
         user.setPassword(userPassword);
-        customerMenu();
     } else {
         cin.ignore();
         cout << "Invalid input, or user type + password, try again.\n";
         cout << "Press any key to continue...";
         cin.get();
-        startUI();
+        userCredentialsInput();
     }
 }
 
@@ -253,14 +281,14 @@ void UI::deleteScooter() {
     cout << "~~~~~  Removing a scooter  ~~~~~\n\n";
 
     string id;
-    cout << "Type the id of the scooter to be removed:";
+    cout << "Type the id of the scooter to be removed: ";
     cin.ignore();
     getline(cin, id);
 
     if (controller->remove(id)) {
-        cout << "\nThe scooter has been removed!\n";
+        cout << "\nThe scooter has been removed!\n\n";
     } else {
-        cout << "\nNo scooter id matched your input!\n";
+        cout << "\nNo scooter id matched your input!\n\n";
     }
 }
 
@@ -455,3 +483,4 @@ void UI::printScooterVector(const vector<Scooter> &scooterVector) {
     }
     cout << '\n';
 }
+
