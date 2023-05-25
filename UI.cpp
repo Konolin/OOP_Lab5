@@ -427,15 +427,15 @@ void UI::useScooter() {
 }
 
 void UI::showAllReservedScooters() {
-    cout << "~~~~ Reserved scooters ~~~~\n\n";
+    cout << "~~~~ Reserved scooters ~~~~\n";
 
     vector<Scooter> reservedScooters = user.getAllUserReservedScooters();
     if (!reservedScooters.empty()) {
-        cout << "Here is a list of all reserved scooters:\n";
+        cout << "Here is a list of all reserved scooters:\n\n";
         printScooterVector(reservedScooters);
 
     } else {
-        cout << "\nThere are no reserved scooters!\n";
+        cout << "\nThere are no reserved scooters!\n\n";
     }
 }
 

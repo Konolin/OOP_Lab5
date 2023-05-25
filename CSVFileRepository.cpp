@@ -91,15 +91,7 @@ vector<Scooter> CSVRepository::readFromCSV() {
         commissionDateObj.month = stoi(commissionDateMonth);
         commissionDateObj.year = stoi(commissionDateYear);
         int mileage = stoi(mileageStr);
-        static const std::map<string, Status> statusMap{
-                {"parked",        Status::parked},
-                {"reserved",      Status::reserved},
-                {"inUse",         Status::inUse},
-                {"inMaintenance", Status::inMaintenance},
-                {"outOfService",  Status::outOfService},
-
-        };
-        Status status = statusMap.find(statusStr)->second;
+        Status status = Domain::stringToStatus(statusStr);
 
         // Create a Scooter object and add it to the vector
         readVector.emplace_back(id, model, commissionDateObj, mileage, lastLocation, status);

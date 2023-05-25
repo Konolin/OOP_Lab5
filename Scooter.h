@@ -15,6 +15,8 @@ namespace Domain {
 
     string statusToString(const Status &status);
 
+    Status stringToStatus(const string &statusStr);
+
     struct Date {
         int day, month, year;
     };

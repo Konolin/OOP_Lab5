@@ -153,10 +153,23 @@ string Domain::statusToString(const Domain::Status &status) {
             return "in use";
         case inMaintenance:
             return "in maintenance";
-        case outOfService:
-            return "out of service";
         default:
-            return "unknown";
+            return "out of service";
+    }
+}
+
+
+Status Domain::stringToStatus(const string& statusStr) {
+    if (statusStr == "parked") {
+        return Status::parked;
+    } else if (statusStr == "reserved") {
+        return Status::reserved;
+    } else if (statusStr == "in use") {
+        return Status::inUse;
+    } else if (statusStr == "in maintenance") {
+        return Status::inMaintenance;
+    } else {
+        return Status::outOfService;
     }
 }
 
